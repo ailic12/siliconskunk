@@ -12,7 +12,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "vitest run",
-    "migrate": "node-pg-migrate up --migrations-dir db/migrations --tsconfig tsconfig.base.json --envPath .env"
+    "migrate": "node-pg-migrate up --migrations-dir db/migrations --tsconfig tsconfig.base.json --envPath .env",
+    "seed": "ts-node --project tsconfig.base.json --transpile-only scripts/dev/seed.ts"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
