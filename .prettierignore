@@ -1,0 +1,13 @@
+node_modules
+dist
+coverage
+db/migrations/*.js
+
+# Pre-existing planning/governance artefacts, outside TASK-01's scaffold scope
+.claude
+agentic-workflow
+bid
+context
+design
+planning
+poc
