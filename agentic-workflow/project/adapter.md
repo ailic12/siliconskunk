@@ -87,3 +87,9 @@ Use repository-defined `package.json` scripts for the affected change (e.g. test
 - Independent Review is read-only.
 - No external work-management or knowledge system exists to modify.
 - Commits, pushes, branches, pull/merge requests, merges, release tags, deployments, publications, and equivalent delivery actions are outside this adapter and are never performed automatically by this workflow.
+
+## Independent Review isolation (execution requirement)
+
+[`../workflows/independent-review.md`](../workflows/independent-review.md) states the generic preference for a fresh review context "where the host supports it." For this repository that support exists: `.claude/agents/independent-reviewer.md` is a dedicated, read-only, fresh-context subagent. For `/work TASK-XX` executions in this repository, that preference is not optional — Independent Review MUST run through that subagent, invoked as a new context for every review and every rerun after `CHANGES REQUIRED`. The orchestrating `/work` context must never review its own implementation.
+
+If the fresh reviewer subagent cannot be started (tool unavailable, invocation failure, or equivalent), do not fall back to reviewing in the orchestrating context. Report `REVIEW BLOCKED — REVIEWER UNAVAILABLE` and stop for a human decision, using the same shape as the other `REVIEW BLOCKED` outcomes in [`../protocols/lifecycle.md`](../protocols/lifecycle.md).

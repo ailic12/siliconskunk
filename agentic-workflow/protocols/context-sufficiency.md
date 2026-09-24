@@ -43,11 +43,16 @@ Use this evidence table for HIGH-risk work:
 |---|---|---|---|---|---|
 | <control> | APPLICABLE / NOT APPLICABLE — reason | <source> | <check or rationale> | <result> | <risk or none> |
 
-For `MEDIUM` and `HIGH` work, a readable Work Item alone is never sufficient.
-Check the configured Decision Closure source and relevant interface, dependency,
-security, operational, or migration evidence. For `LOW` work, stop after the
-Work Item, original criteria, and affected repository evidence establish that
-the change is truly isolated.
+For `MEDIUM` and `HIGH` work, a readable Work Item (task file) alone is never
+sufficient. Check the relevant approved local artefacts configured in
+[`../project/adapter.md`](../project/adapter.md), plus relevant interface,
+dependency, security, data, or repository evidence. No Decision Closure,
+Jira, Confluence, or other external work-management or knowledge system is
+configured for this project. Keep discovery proportional: this does not
+require loading every configured artefact for every task, only the ones
+relevant to this specific change. For `LOW` work, stop after the Work Item,
+original criteria, and affected repository evidence establish that the change
+is truly isolated.
 
 ## Blocking conditions
 
