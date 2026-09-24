@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Smart Office — Booking Demo</title>
+  <style>
+    :root { color-scheme: light; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      max-width: 860px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      color: #1a1a1a;
+    }
+    h1 { font-size: 1.4rem; }
+    fieldset {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    legend { font-weight: 600; padding: 0 0.4rem; }
+    label { display: block; margin: 0.5rem 0 0.2rem; font-size: 0.9rem; }
+    select, input, button {
+      font-size: 1rem;
+      padding: 0.4rem;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    button {
+      cursor: pointer;
+      margin-top: 0.75rem;
+      background: #1d4ed8;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 0.6rem;
+      width: auto;
+      min-width: 10rem;
+    }
+    button:hover { background: #1e40af; }
+    button.book-btn {
+      width: auto;
+      min-width: 6rem;
+      padding: 0.3rem 0.8rem;
+      margin: 0;
+    }
+    table { border-collapse: collapse; width: 100%; margin-top: 1rem; }
+    th, td { text-align: left; padding: 0.4rem 0.6rem; border-bottom: 1px solid #eee; }
+    .message {
+      margin-top: 1rem;
+      padding: 0.75rem;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      white-space: pre-wrap;
+    }
+    .message.success { background: #dcfce7; color: #166534; }
+    .message.error { background: #fee2e2; color: #991b1b; }
+    pre { background: #f4f4f4; padding: 0.6rem; border-radius: 6px; overflow-x: auto; }
+    #future-state {
+      color: #6b7280;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Smart Office — Capability 1 Demo (Booking Creation)</h1>
+  <p>
+    A thin visual layer over the existing <code>GET /availability</code> and
+    <code>POST /bookings</code> API. Every result shown below is exactly what the
+    server returned — nothing is computed or filtered client-side.
+  </p>
+
+  <fieldset>
+    <legend>Act as</legend>
+    <label for="employee-select">Employee</label>
+    <select id="employee-select"></select>
+  </fieldset>
+
+  <fieldset>
+    <legend>Search availability</legend>
+    <label for="office-select">Office</label>
+    <select id="office-select"></select>
+
+    <label for="resource-type-select">Resource type</label>
+    <select id="resource-type-select">
+      <option value="Desk">Desk</option>
+      <option value="ParkingSpace">ParkingSpace</option>
+    </select>
+
+    <label for="date-input">Date</label>
+    <input id="date-input" type="date" />
+
+    <button id="search-btn" type="button">Search availability</button>
+  </fieldset>
+
+  <div id="results"></div>
+  <div id="message"></div>
+
+  <fieldset id="future-state">
+    <legend>Status &amp; notifications (coming soon)</legend>
+    <p>
+      This area is reserved for check-in/release status history and the
+      notification log once those capabilities (TASK-06–12) are implemented.
+      Nothing is simulated here today.
+    </p>
+  </fieldset>
+
+  <script>
+    // Mirrors db/seed/employees.ts. Dev-only fixtures, already public in the
+    // repository — reused verbatim as the task's approved mocked-identity UI.
+    const EMPLOYEES = [
+      { displayName: "Alice Petrovic", devToken: "dev-token-alice" },
+      { displayName: "Bojan Jovanovic", devToken: "dev-token-bojan" },
+      { displayName: "Catalina Nikolic", devToken: "dev-token-catalina" },
+      { displayName: "Daniel Tan", devToken: "dev-token-daniel" },
+      { displayName: "Eunice Lim", devToken: "dev-token-eunice" },
+      { displayName: "Farhan Rahman", devToken: "dev-token-farhan" },
+    ];
+
+    // Mirrors db/seed/offices.ts.
+    const OFFICES = [
+      { id: "00000000-0000-4000-8000-000000000001", name: "Belgrade HQ" },
+      { id: "00000000-0000-4000-8000-000000000002", name: "Singapore Hub" },
+    ];
+
+    const ERROR_MESSAGES = {
+      resource_not_bookable: "This resource cannot be booked right now (not in a bookable state).",
+      outside_booking_window: "That date is outside the allowed booking window.",
+      resource_already_booked: "Someone already booked that resource for this date.",
+      employee_daily_limit_reached: "This employee already has a booking of this resource type for this date.",
+    };
+
+    const employeeSelect = document.getElementById("employee-select");
+    const officeSelect = document.getElementById("office-select");
+    const resourceTypeSelect = document.getElementById("resource-type-select");
+    const dateInput = document.getElementById("date-input");
+    const searchBtn = document.getElementById("search-btn");
+    const resultsEl = document.getElementById("results");
+    const messageEl = document.getElementById("message");
+
+    for (const employee of EMPLOYEES) {
+      const opt = document.createElement("option");
+      opt.value = employee.devToken;
+      opt.textContent = employee.displayName;
+      employeeSelect.appendChild(opt);
+    }
+
+    for (const office of OFFICES) {
+      const opt = document.createElement("option");
+      opt.value = office.id;
+      opt.textContent = office.name;
+      officeSelect.appendChild(opt);
+    }
+
+    function currentToken() {
+      return employeeSelect.value;
+    }
+
+    function showMessage(text, kind) {
+      messageEl.innerHTML = "";
+      const div = document.createElement("div");
+      div.className = "message " + kind;
+      div.textContent = text;
+      messageEl.appendChild(div);
+    }
+
+    function describeError(body) {
+      if (body && body.error === "unauthorized") {
+        return "Unauthorized: no valid bearer token was accepted (401).";
+      }
+      if (body && body.reason && ERROR_MESSAGES[body.reason]) {
+        return ERROR_MESSAGES[body.reason] + " (" + body.message + ")";
+      }
+      if (body && body.message) {
+        return body.message;
+      }
+      return "Request failed.";
+    }
+
+    async function searchAvailability() {
+      resultsEl.innerHTML = "";
+      messageEl.innerHTML = "";
+
+      const params = new URLSearchParams({
+        officeId: officeSelect.value,
+        resourceType: resourceTypeSelect.value,
+        date: dateInput.value,
+      });
+
+      const res = await fetch("/availability?" + params.toString(), {
+        headers: { Authorization: "Bearer " + currentToken() },
+      });
+      const body = await res.json();
+
+      if (!res.ok) {
+        showMessage(describeError(body), "error");
+        return;
+      }
+
+      renderResults(body.resources);
+    }
+
+    function renderResults(resources) {
+      if (!resources.length) {
+        resultsEl.innerHTML = "<p>No available resources for this search.</p>";
+        return;
+      }
+
+      const table = document.createElement("table");
+      table.innerHTML =
+        "<thead><tr><th>Name</th><th>Type</th><th>Status</th><th></th></tr></thead>";
+      const tbody = document.createElement("tbody");
+
+      for (const resource of resources) {
+        const tr = document.createElement("tr");
+
+        const nameTd = document.createElement("td");
+        nameTd.textContent = resource.name;
+        tr.appendChild(nameTd);
+
+        const typeTd = document.createElement("td");
+        typeTd.textContent = resource.type;
+        tr.appendChild(typeTd);
+
+        const statusTd = document.createElement("td");
+        statusTd.textContent = resource.status;
+        tr.appendChild(statusTd);
+
+        const actionTd = document.createElement("td");
+        const bookBtn = document.createElement("button");
+        bookBtn.className = "book-btn";
+        bookBtn.type = "button";
+        bookBtn.textContent = "Book";
+        bookBtn.addEventListener("click", () => bookResource(resource.id));
+        actionTd.appendChild(bookBtn);
+        tr.appendChild(actionTd);
+
+        tbody.appendChild(tr);
+      }
+
+      table.appendChild(tbody);
+      resultsEl.innerHTML = "";
+      resultsEl.appendChild(table);
+    }
+
+    async function bookResource(resourceId) {
+      messageEl.innerHTML = "";
+
+      const res = await fetch("/bookings", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + currentToken(),
+        },
+        body: JSON.stringify({ resourceId, bookingDate: dateInput.value }),
+      });
+      const body = await res.json();
+
+      if (!res.ok) {
+        showMessage(describeError(body), "error");
+        return;
+      }
+
+      const pre = document.createElement("pre");
+      pre.textContent = JSON.stringify(body, null, 2);
+
+      messageEl.innerHTML = "";
+      const wrapper = document.createElement("div");
+      wrapper.className = "message success";
+      wrapper.appendChild(document.createTextNode("Reserved:"));
+      wrapper.appendChild(pre);
+      messageEl.appendChild(wrapper);
+    }
+
+    searchBtn.addEventListener("click", () => {
+      searchAvailability().catch((err) => showMessage(String(err), "error"));
+    });
+
+    dateInput.valueAsDate = new Date();
+  </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "api",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start:api"],
+      "port": 3000,
+      "autoPort": true,
+      "env": {
+        "DATABASE_URL": "postgres://siliconskunk:siliconskunk_dev_only@localhost:5432/siliconskunk"
+      }
+    }
+  ]
+}
