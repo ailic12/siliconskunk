@@ -1,6 +1,6 @@
 # Smart Office — Camp PoC Selection
 
-Status: **DRAFT — PENDING FINAL HUMAN REVIEW (Revision 1)**
+Status: **APPROVED — HUMAN REVIEW COMPLETE (Revision 1)**
 Input basis: [`context/smart-office-context.md`](../context/smart-office-context.md) (approved Context Discovery) and [`design/smart-office-hld.md`](../design/smart-office-hld.md) (approved HLD, Revision 3).
 Scope: this document selects **2–3 functionalities** for the Camp PoC per **C-01**. It does not change the HLD, does not create implementation tasks, and does not write code.
 
@@ -228,6 +228,6 @@ Before this selection is treated as approved, a human reviewer should confirm:
 
 ## 8. Outcome
 
-**Status: SELECTION PROPOSED — AWAITING FINAL HUMAN REVIEW (Revision 1 corrections applied)**
+**Status: APPROVED — HUMAN REVIEW COMPLETE (Revision 1)**
 
 No implementation tasks have been created and no code has been written. This document stops here, per the task boundary.
