@@ -7,7 +7,7 @@ Scope: The **complete target solution**, not the hackathon PoC. PoC selection is
 
 ## 0. Document Scope & Input Basis
 
-The only authoritative input available in this repository is [`context/smart-office-context.md`](../context/smart-office-context.md) — the approved Context Discovery document (Stage 1). No separate "original specification" file exists in the repository; the Context Discovery document itself states it is derived from the original specification and is marked **"Sufficient for High-Level Solution Design: YES"** with **no blocking questions**. This HLD treats that document as the single source of truth for requirements and traces every design decision back to it.
+The only authoritative input available in this repository is [`context/smart-office-context.md`](../context/smart-office-context.md) — the approved Context Discovery document. No separate "original specification" file exists in the repository; the Context Discovery document itself states it is derived from the original specification and is marked **"Sufficient for High-Level Solution Design: YES"** with **no blocking questions**. This HLD treats that document as the single source of truth for requirements and traces every design decision back to it.
 
 Throughout this document, statements are tagged so requirements are never confused with design choices:
 
