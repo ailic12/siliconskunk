@@ -1,6 +1,6 @@
 ---
 name: work
-description: Execute exactly one approved Smart Office PoC implementation task end-to-end through the existing agentic/ lifecycle.
+description: Execute exactly one approved Smart Office PoC implementation task end-to-end through the existing agentic-workflow/ lifecycle.
 disable-model-invocation: true
 argument-hint: TASK-XX
 ---
@@ -10,12 +10,12 @@ argument-hint: TASK-XX
 Argument: `$ARGUMENTS` — expected to be a single task identifier, e.g. `TASK-07`.
 
 This skill is the orchestrator only. It does not redefine the lifecycle — it
-sequences the existing files under `agentic/`, which remain the source of
+sequences the existing files under `agentic-workflow/`, which remain the source of
 truth. Read each referenced file in full at the point it is needed; do not
 reproduce its content here or invent shortcuts.
 
-`agentic/protocols/lifecycle.md` is canonical for routing and terminal states.
-`agentic/project/adapter.md` is canonical for task resolution, source
+`agentic-workflow/protocols/lifecycle.md` is canonical for routing and terminal states.
+`agentic-workflow/project/adapter.md` is canonical for task resolution, source
 authority, and this project's execution rules (including mandatory reviewer
 isolation, below).
 
@@ -27,7 +27,7 @@ single valid `TASK-XX` identifier. Do not guess which task was meant.
 
 ## Step 1 — Resolve the task
 
-Follow the resolution rule in `agentic/project/adapter.md` ("Work item
+Follow the resolution rule in `agentic-workflow/project/adapter.md` ("Work item
 resolution"): glob `planning/tasks/TASK-XX-*.md` for the requested number.
 
 - Zero matches -> report `TASK NOT FOUND` and stop.
@@ -37,9 +37,9 @@ resolution"): glob `planning/tasks/TASK-XX-*.md` for the requested number.
 
 ## Step 2 — Context Discovery
 
-Read and follow `agentic/workflows/context-discovery.md` in full (it in turn
-uses `agentic/protocols/context-sufficiency.md`, `agentic/protocols/evidence.md`,
-`agentic/protocols/human-clarification.md`, and `agentic/project/adapter.md`).
+Read and follow `agentic-workflow/workflows/context-discovery.md` in full (it in turn
+uses `agentic-workflow/protocols/context-sufficiency.md`, `agentic-workflow/protocols/evidence.md`,
+`agentic-workflow/protocols/human-clarification.md`, and `agentic-workflow/project/adapter.md`).
 Produce its required output.
 
 - `CONTEXT INSUFFICIENT` or `DECOMPOSITION REQUIRED` -> stop, per that
@@ -48,7 +48,7 @@ Produce its required output.
 
 ## Step 3 — Implementation Planning
 
-Read and follow `agentic/workflows/implementation-planning.md` in full, using
+Read and follow `agentic-workflow/workflows/implementation-planning.md` in full, using
 the Normalized Engineering Context from Step 2. Produce its required output.
 
 - Stop at `HUMAN APPROVAL REQUIRED`. Print the plan and end your turn here.
@@ -66,10 +66,10 @@ moving on to another topic.
 
 ## Step 4 — Implementation and Verification (only after explicit approval)
 
-Read and follow `agentic/workflows/implementation.md` and
-`agentic/protocols/implementation.md` in full, using the approved plan from
+Read and follow `agentic-workflow/workflows/implementation.md` and
+`agentic-workflow/protocols/implementation.md` in full, using the approved plan from
 Step 3 and the mandatory plan-approval record format in
-`agentic/protocols/human-review.md`.
+`agentic-workflow/protocols/human-review.md`.
 
 - `IMPLEMENTATION BLOCKED` -> stop and report, per that workflow.
 - `IMPLEMENTATION COMPLETE — READY FOR REVIEW` -> continue to Step 5.
@@ -77,7 +77,7 @@ Step 3 and the mandatory plan-approval record format in
 ## Step 5 — Independent Review (mandatory fresh context)
 
 Independent Review must never run in this orchestrating context. Per the
-"Independent Review isolation" execution rule in `agentic/project/adapter.md`,
+"Independent Review isolation" execution rule in `agentic-workflow/project/adapter.md`,
 delegate to the dedicated subagent:
 
 Invoke the Agent tool with `subagent_type: "independent-reviewer"` (defined in
@@ -91,9 +91,9 @@ needs to review cold, since it starts with no memory of this conversation:
 
 If the subagent cannot be started for any reason, do **not** review in this
 context as a fallback. Report `REVIEW BLOCKED — REVIEWER UNAVAILABLE` (see
-`agentic/project/adapter.md`) and stop for a human decision.
+`agentic-workflow/project/adapter.md`) and stop for a human decision.
 
-Route the reviewer's returned result per `agentic/workflows/independent-review.md`:
+Route the reviewer's returned result per `agentic-workflow/workflows/independent-review.md`:
 
 - `CHANGES REQUIRED` -> hand the findings to the Implementer (this context),
   fix only inside the scope approved in Step 3, rerun the relevant
@@ -102,13 +102,13 @@ Route the reviewer's returned result per `agentic/workflows/independent-review.m
   one — for the rerun. Repeat until passed or escalated.
 - `REVIEW BLOCKED — UNEXPECTED MUTATION`, `REVIEW BLOCKED — IMPLEMENTATION
   BASIS UNCONFIRMED`, or `REVIEW ESCALATION REQUIRED` -> stop and report, per
-  `agentic/protocols/lifecycle.md`.
+  `agentic-workflow/protocols/lifecycle.md`.
 - `REVIEW PASSED — READY FOR FINAL HUMAN REVIEW` -> continue to Step 6.
 
 ## Step 6 — Final Human Review
 
 Assemble the evidence package per the "Final evidence package" and "Mandatory
-final disposition record" sections of `agentic/protocols/human-review.md`.
+final disposition record" sections of `agentic-workflow/protocols/human-review.md`.
 Print `READY FOR FINAL HUMAN REVIEW` and end your turn. Wait for the user's
 explicit disposition — do not infer one.
 
@@ -130,5 +130,5 @@ explicit disposition — do not infer one.
   automatically — a new `/work TASK-XX` is required for every task.
 - Never commit, push, branch, open a PR, merge, release, deploy, or publish.
   Those require a separate explicit human instruction after this skill stops.
-- Do not duplicate the detailed procedures in `agentic/workflows/*.md` and
-  `agentic/protocols/*.md` here — read and follow them directly.
+- Do not duplicate the detailed procedures in `agentic-workflow/workflows/*.md` and
+  `agentic-workflow/protocols/*.md` here — read and follow them directly.
