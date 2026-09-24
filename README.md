@@ -1,4 +1,4 @@
-# siliconskunk test
+# siliconskunk
 
 Smart Office Camp PoC.
 
