@@ -1,4 +1,4 @@
-# Smart Office — High-Level Solution Design (Stage 2)
+# Smart Office — High-Level Solution Design
 
 Status: **DRAFT — FOR HUMAN REVIEW**
 Scope: The **complete target solution**, not the hackathon PoC. PoC selection is an explicit later stage and is out of scope here.
@@ -588,5 +588,3 @@ graph LR
 **Yes.** The full-solution architecture is defined end-to-end (booking, conflict prevention, check-in, release, notifications, admin, audit, multi-office, security, deployment). PoC selection can now proceed by choosing 2–3 functionalities that validate the highest-risk assumptions in this design — most naturally: (a) booking creation with conflict prevention (validates R-01/AD-02, the riskiest correctness guarantee), and (b) check-in ingestion + automatic release with idempotency (validates R-02/R-03/R-04/R-05, the riskiest reliability guarantees) — but that selection is deliberately **not made in this document**, per the task boundary.
 
 ---
-
-*End of Stage 2 High-Level Design. Per instructions, this document stops here for human review — no PoC selection, task breakdown, or implementation has been performed.*
