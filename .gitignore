@@ -1,5 +1,6 @@
 /.idea
 node_modules/
+/.codex-build
 dist/
 coverage/
 .env
