@@ -16,6 +16,11 @@
     "migrate": "node-pg-migrate up --migrations-dir db/migrations --tsconfig tsconfig.base.json --envPath .env",
     "seed": "ts-node --project tsconfig.base.json --transpile-only scripts/dev/seed.ts",
     "start:api": "ts-node --project tsconfig.base.json --transpile-only src/api/server.ts",
+    "demo:happy-path": "ts-node --project tsconfig.base.json --transpile-only scripts/demo/happy-path.ts",
+    "demo:race": "ts-node --project tsconfig.base.json --transpile-only scripts/demo/adversarial-concurrent-race.ts",
+    "demo:duplicate-checkin": "ts-node --project tsconfig.base.json --transpile-only scripts/demo/adversarial-duplicate-checkin.ts",
+    "demo:late-checkin": "ts-node --project tsconfig.base.json --transpile-only scripts/demo/adversarial-late-checkin.ts",
+    "demo:notification-failure": "ts-node --project tsconfig.base.json --transpile-only scripts/demo/adversarial-notification-failure.ts",
     "build:frontend": "vite build",
     "dev:frontend": "vite",
     "typecheck:frontend": "tsc --project frontend/tsconfig.json"
