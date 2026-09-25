@@ -1,0 +1,477 @@
+{
+  "schemaVersion": 3,
+  "kind": "history",
+  "harvestedAt": "2026-09-25T11:11:29.647Z",
+  "member": "Sentic, Stefan {External~ZUEHLKE ENGINEERING GMBH}",
+  "repo": {
+    "name": "siliconskunk"
+  },
+  "sources": {
+    "claudeCode": {
+      "status": "empty",
+      "reason": "Claude Code sessions exist on this machine but none belong to this repo",
+      "filesScanned": 1,
+      "failures": []
+    },
+    "copilot": {
+      "status": "empty",
+      "reason": "no VS Code workspace or Copilot CLI session on this machine maps to this repo",
+      "hashesSeen": 10,
+      "hashesMatched": 0,
+      "cliSessionsSeen": 77
+    },
+    "codex": {
+      "status": "harvested",
+      "filesScanned": 9,
+      "sessionsMatched": 8,
+      "failures": []
+    },
+    "cursor": {
+      "status": "not-harvested",
+      "reason": "no Cursor user-data directory on this machine"
+    }
+  },
+  "chat": {
+    "claudeCode": [],
+    "copilot": [],
+    "codex": [
+      {
+        "sessionId": "01a0d822-bb6e-7a91-b670-13f9d7da663b",
+        "startedAt": "2026-09-25T10:38:54.017Z",
+        "endedAt": "2026-09-25T10:40:02.287Z",
+        "durationMinutes": 1,
+        "branches": [],
+        "userPrompts": 1,
+        "promptLength": {
+          "count": 1,
+          "min": 401,
+          "median": 401,
+          "p90": 401,
+          "max": 401,
+          "mean": 401,
+          "totalChars": 401
+        },
+        "corrections": 0,
+        "assistantTurns": 3,
+        "toolCalls": {
+          "exec": 6
+        },
+        "toolCallTotal": 6,
+        "commands": {
+          "test": 0,
+          "buildOrLint": 0,
+          "destructive": 0,
+          "other": 6
+        },
+        "testRuns": [],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "unreadRecords": 0,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-25T10:38:54.745Z",
+                "text": "based on the reassesment in file [smart-office-phases-and-milestones.md](siliconskunk/projects/smart-office-phases-and-milestones.md) create new assesment in separate md file so it takes into account work with ai assistents, cloud architect and delivery lead being done by the sa…"
+              }
+            ],
+            "offered": 1,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [],
+            "offered": 0,
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sessionId": "01a0d816-e372-79f2-9f08-cbf0a3a3f451",
+        "startedAt": "2026-09-25T10:23:41.113Z",
+        "endedAt": "2026-09-25T11:03:50.392Z",
+        "durationMinutes": 40,
+        "branches": [],
+        "userPrompts": 4,
+        "promptLength": {
+          "count": 4,
+          "min": 197,
+          "median": 247,
+          "p90": 382,
+          "max": 382,
+          "mean": 268,
+          "totalChars": 1072
+        },
+        "corrections": 0,
+        "assistantTurns": 13,
+        "toolCalls": {
+          "exec": 43,
+          "js": 47
+        },
+        "toolCallTotal": 90,
+        "commands": {
+          "test": 0,
+          "buildOrLint": 0,
+          "destructive": 0,
+          "other": 43
+        },
+        "testRuns": [],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "unreadRecords": 0,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-25T10:23:41.569Z",
+                "text": "Update slide 1 of [proposal-final.pptx](siliconskunk/proposal/proposal-final.pptx) as an executive summary and take into account other slides and [smart-office-context.md](siliconskunk/context/smart-office-context.md) and [smart-office-hld.md](siliconskunk/design/smart-office-hl…"
+              },
+              {
+                "at": "2026-09-25T10:45:32.565Z",
+                "text": "Create a new slide which prposed team structure and use table from Assessment and staffing model of the [smart-office-ai-assisted-consolidated-role-assessment.md](siliconskunk/projects/smart-office-ai-assisted-consolidated-role-assessment.md) as a basis.&#x20; Update slide 8 (ro…"
+              },
+              {
+                "at": "2026-09-25T10:53:56.157Z",
+                "text": "Update slide 10 and remove any mention of 20% reserve. Update slide 1 with new executive summary so that it also mentiones that it's planned to use the ai assistent tools and have 3 POCs developed using them."
+              },
+              {
+                "at": "2026-09-25T11:02:54.532Z",
+                "text": "Update executive sumary (1st slide) by extending proposal to include following txt at the begiinng: \"**Booking, check-in and automatic release free unused space. A 10-week proof tests the core.** \""
+              }
+            ],
+            "offered": 4,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [],
+            "offered": 0,
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sessionId": "01a0d806-50ab-7581-86d5-10bb61a2ac61",
+        "startedAt": "2026-09-25T10:07:23.260Z",
+        "endedAt": "2026-09-25T10:12:37.237Z",
+        "durationMinutes": 5,
+        "branches": [],
+        "userPrompts": 1,
+        "promptLength": {
+          "count": 1,
+          "min": 193,
+          "median": 193,
+          "p90": 193,
+          "max": 193,
+          "mean": 193,
+          "totalChars": 193
+        },
+        "corrections": 0,
+        "assistantTurns": 4,
+        "toolCalls": {
+          "exec": 42,
+          "wait": 1
+        },
+        "toolCallTotal": 43,
+        "commands": {
+          "test": 0,
+          "buildOrLint": 0,
+          "destructive": 0,
+          "other": 42
+        },
+        "testRuns": [],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "unreadRecords": 0,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-25T10:07:24.456Z",
+                "text": "Extract png image from the graph in section 3 of [agentic\\_sdlc\\_proposal\\_team\\_brief.md](siliconskunk/bid/agentic_sdlc_proposal_team_brief.md) (Suggested slide diagram — documented lifecycle)"
+              }
+            ],
+            "offered": 1,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [],
+            "offered": 0,
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sessionId": "01a0d7f7-53d2-7e82-be2b-223488227f79",
+        "startedAt": "2026-09-25T09:51:01.380Z",
+        "endedAt": "2026-09-25T09:57:12.286Z",
+        "durationMinutes": 6,
+        "branches": [],
+        "userPrompts": 1,
+        "promptLength": {
+          "count": 1,
+          "min": 369,
+          "median": 369,
+          "p90": 369,
+          "max": 369,
+          "mean": 369,
+          "totalChars": 369
+        },
+        "corrections": 0,
+        "assistantTurns": 5,
+        "toolCalls": {
+          "exec": 23,
+          "js": 24
+        },
+        "toolCallTotal": 47,
+        "commands": {
+          "test": 0,
+          "buildOrLint": 0,
+          "destructive": 0,
+          "other": 23
+        },
+        "testRuns": [],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "unreadRecords": 0,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-25T09:51:02.098Z",
+                "text": "Replace the third slide of [third-draft-proposal.pptx](siliconskunk/proposal/third-draft-proposal.pptx) presentation using the following content: Solution concept, main user journeys, capabilities and differentiators. Use [smart-office-context.md](siliconskunk/context/smart-offi…"
+              }
+            ],
+            "offered": 1,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [],
+            "offered": 0,
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sessionId": "01a0d7b5-6ccf-7d40-b7d1-92074b1205d8",
+        "startedAt": "2026-09-25T08:38:21.314Z",
+        "endedAt": "2026-09-25T08:51:04.665Z",
+        "durationMinutes": 13,
+        "branches": [],
+        "userPrompts": 3,
+        "promptLength": {
+          "count": 3,
+          "min": 77,
+          "median": 324,
+          "p90": 1533,
+          "max": 1533,
+          "mean": 645,
+          "totalChars": 1934
+        },
+        "corrections": 0,
+        "assistantTurns": 10,
+        "toolCalls": {
+          "exec": 31,
+          "wait": 1
+        },
+        "toolCallTotal": 32,
+        "commands": {
+          "test": 0,
+          "buildOrLint": 0,
+          "destructive": 0,
+          "other": 31
+        },
+        "testRuns": [],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "unreadRecords": 0,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-25T08:38:21.995Z",
+                "text": "I jsut ran the script to get my chat history for this repo. And it found nothing for codex plugin in vscode. node -e \"const fs=require('fs'),p=require('path'),os=require('os');const h=process.env.CODEX\\_HOME||p.join(os.homedir(),'.codex');console.log('Codex home:',h,fs.existsSyn…"
+              },
+              {
+                "at": "2026-09-25T08:43:54.949Z",
+                "text": "okay I see that the problem is that I was in Camp workspace. Still can you adapt the script and rerun it, so that we do pick up all chat history that is relevant for us? also give me instructions on what you changed and why, I need to do similar changes on global script for othe…"
+              },
+              {
+                "at": "2026-09-25T08:50:55.140Z",
+                "text": "where are he sessions saved? I dont see them in history-sentic-stefan-.. file"
+              }
+            ],
+            "offered": 3,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [],
+            "offered": 0,
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sessionId": "01a0d37e-8256-7b82-9545-925aedb15844",
+        "startedAt": "2026-09-24T13:00:00.407Z",
+        "endedAt": "2026-09-24T13:09:28.231Z",
+        "durationMinutes": 9,
+        "branches": [],
+        "userPrompts": 2,
+        "promptLength": {
+          "count": 2,
+          "min": 237,
+          "median": 262,
+          "p90": 287,
+          "max": 287,
+          "mean": 262,
+          "totalChars": 524
+        },
+        "corrections": 0,
+        "assistantTurns": 6,
+        "toolCalls": {
+          "exec": 13
+        },
+        "toolCallTotal": 13,
+        "commands": {
+          "test": 0,
+          "buildOrLint": 0,
+          "destructive": 0,
+          "other": 13
+        },
+        "testRuns": [],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "unreadRecords": 0,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-24T13:00:00.825Z",
+                "text": "Define necesssary roles who are risk owners for the project and define their responsibilites. Use [smart-office-context.md](siliconskunk/context/smart-office-context.md) and [smart-office-hld.md](siliconskunk/design/smart-office-hld.md)."
+              },
+              {
+                "at": "2026-09-24T13:08:26.611Z",
+                "text": "create a new doc containing-risk -and assumptions. Based on [smart-office-context.md](siliconskunk/context/smart-office-context.md) , [smart-office-hld.md](siliconskunk/design/smart-office-hld.md) and [smart-office-risk-ownership.md](siliconskunk/projects/smart-office-risk-owner…"
+              }
+            ],
+            "offered": 2,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [],
+            "offered": 0,
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sessionId": "01a0d36c-9b59-7731-8836-fdd3216f6c11",
+        "startedAt": "2026-09-24T12:40:47.961Z",
+        "endedAt": "2026-09-24T12:48:12.726Z",
+        "durationMinutes": 7,
+        "branches": [],
+        "userPrompts": 3,
+        "promptLength": {
+          "count": 3,
+          "min": 117,
+          "median": 191,
+          "p90": 222,
+          "max": 222,
+          "mean": 177,
+          "totalChars": 530
+        },
+        "corrections": 0,
+        "assistantTurns": 6,
+        "toolCalls": {
+          "exec": 8
+        },
+        "toolCallTotal": 8,
+        "commands": {
+          "test": 0,
+          "buildOrLint": 0,
+          "destructive": 0,
+          "other": 8
+        },
+        "testRuns": [],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "unreadRecords": 0,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-24T12:40:48.367Z",
+                "text": "Based on [smart-office-context.md](siliconskunk/context/smart-office-context.md) and [smart-office-hld.md](siliconskunk/design/smart-office-hld.md) define roles required from the client side."
+              },
+              {
+                "at": "2026-09-24T12:44:11.143Z",
+                "text": "Based on defined roles and considering [smart-office-phases-and-milestones.md](siliconskunk/projects/smart-office-phases-and-milestones.md) define how much time and effort is needed by client to be involved in this project"
+              },
+              {
+                "at": "2026-09-24T12:47:23.782Z",
+                "text": "unify data from 2 previous outputs and generate client-involvement.md file located in [bid](siliconskunk/bid/) folder"
+              }
+            ],
+            "offered": 3,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [],
+            "offered": 0,
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sessionId": "01a0d32d-762e-7440-9544-af012fad4400",
+        "startedAt": "2026-09-24T11:29:27.333Z",
+        "endedAt": "2026-09-24T11:30:12.188Z",
+        "durationMinutes": 1,
+        "branches": [],
+        "userPrompts": 1,
+        "promptLength": {
+          "count": 1,
+          "min": 223,
+          "median": 223,
+          "p90": 223,
+          "max": 223,
+          "mean": 223,
+          "totalChars": 223
+        },
+        "corrections": 0,
+        "assistantTurns": 3,
+        "toolCalls": {
+          "exec": 4
+        },
+        "toolCallTotal": 4,
+        "commands": {
+          "test": 0,
+          "buildOrLint": 0,
+          "destructive": 0,
+          "other": 4
+        },
+        "testRuns": [],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "unreadRecords": 0,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-24T11:29:29.445Z",
+                "text": "Given the files [smart-office-context.md](siliconskunk/context/smart-office-context.md) and [smart-office-hld.md](siliconskunk/design/smart-office-hld.md) define all of the additional details i need to request from a client"
+              }
+            ],
+            "offered": 1,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [],
+            "offered": 0,
+            "truncated": false
+          }
+        }
+      }
+    ],
+    "cursor": []
+  }
+}
