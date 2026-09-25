@@ -76,6 +76,22 @@ function mapBookingRow(row: BookingRow): Booking {
 }
 
 /**
+ * Booking status read (TASK-17): looks up a single booking by its own id,
+ * regardless of owner — ownership enforcement is the caller's responsibility
+ * (booking.service.ts), so this stays a plain lookup like findResourceById.
+ */
+export async function findBookingById(bookingId: string): Promise<Booking | null> {
+  const { rows } = await pool.query<BookingRow>(
+    `SELECT id, resource_id, employee_id, booking_date, resource_type, status, created_at
+     FROM booking
+     WHERE id = $1`,
+    [bookingId],
+  );
+  const row = rows[0];
+  return row ? mapBookingRow(row) : null;
+}
+
+/**
  * Check-in Gateway (TASK-08) matching candidates: a resource has at most one
  * active booking per day (booking_resource_active_unique), so this returns 0
  * or 1 rows.

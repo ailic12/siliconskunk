@@ -12,6 +12,7 @@ async function main(): Promise<void> {
   console.log(`  policies inserted:           ${summary.policiesInserted}`);
   console.log(`  employees inserted:          ${summary.employeesInserted}`);
   console.log(`  dev bearer tokens inserted:  ${summary.devBearerTokensInserted}`);
+  console.log(`  external mappings inserted:  ${summary.externalMappingsInserted}`);
 }
 
 main()

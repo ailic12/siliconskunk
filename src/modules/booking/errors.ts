@@ -5,6 +5,13 @@ export class ResourceNotFoundError extends Error {
   }
 }
 
+export class BookingNotFoundError extends Error {
+  constructor(bookingId: string) {
+    super(`Booking "${bookingId}" was not found.`);
+    this.name = "BookingNotFoundError";
+  }
+}
+
 export class ResourceNotBookableError extends Error {
   constructor(resourceId: string) {
     super(`Resource "${resourceId}" is not currently bookable.`);

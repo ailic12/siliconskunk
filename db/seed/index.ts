@@ -3,6 +3,7 @@ import { seedOffices } from "./offices";
 import { seedResources } from "./resources";
 import { seedPolicies } from "./policies";
 import { seedEmployees, seedDevBearerTokens } from "./employees";
+import { seedExternalMappings } from "./external-mappings";
 
 export interface SeedSummary {
   officesInserted: number;
@@ -10,6 +11,7 @@ export interface SeedSummary {
   policiesInserted: number;
   employeesInserted: number;
   devBearerTokensInserted: number;
+  externalMappingsInserted: number;
 }
 
 /**
@@ -25,6 +27,7 @@ export async function runSeed(): Promise<SeedSummary> {
     const policiesInserted = await seedPolicies(client);
     const employeesInserted = await seedEmployees(client);
     const devBearerTokensInserted = await seedDevBearerTokens(client);
+    const externalMappingsInserted = await seedExternalMappings(client);
 
     return {
       officesInserted,
@@ -32,6 +35,7 @@ export async function runSeed(): Promise<SeedSummary> {
       policiesInserted,
       employeesInserted,
       devBearerTokensInserted,
+      externalMappingsInserted,
     };
   });
 }

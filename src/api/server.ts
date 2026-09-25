@@ -11,6 +11,16 @@ import { registerDemoUiRoutes } from "../demo-ui/demo-ui.routes";
 import { registerCheckinIngressRoutes, registerCheckinAdapter } from "../modules/checkin-ingress";
 import { appQrAdapter } from "../modules/checkin-ingress/adapters/app-qr.adapter";
 import { testHarnessAdapter } from "../modules/checkin-ingress/adapters/test-harness.adapter";
+import { registerCheckinGatewayWorker } from "../modules/checkin-gateway";
+import { runReleaseSweep } from "../modules/release-engine";
+
+const DEFAULT_RELEASE_SWEEP_INTERVAL_MS = Number(process.env.RELEASE_SWEEP_INTERVAL_MS ?? 5000);
+
+export interface StartAppOptions {
+  clock?: Clock;
+  port?: number;
+  sweepIntervalMs?: number;
+}
 
 export function buildApp(clock: Clock = new SystemClock()): FastifyInstance {
   const app = Fastify({ logger: false });
@@ -42,12 +52,39 @@ export function buildApp(clock: Clock = new SystemClock()): FastifyInstance {
   return app;
 }
 
+/**
+ * Single code path for "the application is running" (TASK-17, human-approved
+ * PoC-scoped simplification of the plan's separate api/worker process split,
+ * §1 decision 11): builds the app, starts listening, then wires in the two
+ * already-implemented, already-tested background consumers that nothing
+ * previously invoked outside test files — the Check-in Gateway worker
+ * (TASK-08) and a periodic Release Engine sweep (TASK-09). buildApp() alone
+ * (used by every existing test) still starts neither, so the 85 pre-existing
+ * tests are unaffected; only startApp() — used identically by
+ * `npm run start:api` and by the black-box startup integration test — does.
+ */
+export async function startApp(options: StartAppOptions = {}): Promise<FastifyInstance> {
+  const clock = options.clock ?? new SystemClock();
+  const port = options.port ?? Number(process.env.PORT ?? 3000);
+  const sweepIntervalMs = options.sweepIntervalMs ?? DEFAULT_RELEASE_SWEEP_INTERVAL_MS;
+
+  const app = buildApp(clock);
+  await app.listen({ port, host: "0.0.0.0" });
+
+  await registerCheckinGatewayWorker();
+  // unref: this timer alone must never keep the process (or a test runner)
+  // alive — the listening server socket (and pg-boss's own worker loop) are
+  // what actually keep a real `npm run start:api` process running.
+  setInterval(() => {
+    runReleaseSweep(clock).catch((err) => app.log?.error?.(err));
+  }, sweepIntervalMs).unref();
+
+  return app;
+}
+
 if (require.main === module) {
-  const port = Number(process.env.PORT ?? 3000);
-  buildApp()
-    .listen({ port, host: "0.0.0.0" })
-    .catch((err) => {
-      console.error(err);
-      process.exit(1);
-    });
+  startApp().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
 }

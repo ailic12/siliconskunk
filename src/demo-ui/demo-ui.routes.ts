@@ -1,13 +1,19 @@
-import { readFileSync } from "node:fs";
 import { join } from "node:path";
+import fastifyStatic from "@fastify/static";
 import type { FastifyInstance } from "fastify";
 
-const DEMO_PAGE_PATH = join(__dirname, "../../public/index.html");
+const PUBLIC_DIR = join(__dirname, "../../public");
 
+/**
+ * Serves the built React SPA (TASK-17; replaces TASK-15's single
+ * readFileSync'd static HTML file with a real Vite build output) from the
+ * same public/ directory, at the same unauthenticated same-origin root the
+ * demo page has always been served from (server.ts registers this route
+ * outside the employee-auth child context, unchanged).
+ */
 export function registerDemoUiRoutes(app: FastifyInstance): void {
-  const html = readFileSync(DEMO_PAGE_PATH, "utf-8");
-
-  app.get("/", async (_request, reply) => {
-    return reply.type("text/html").send(html);
+  app.register(fastifyStatic, {
+    root: PUBLIC_DIR,
+    index: ["index.html"],
   });
 }

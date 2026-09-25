@@ -6,8 +6,10 @@ import { resources } from "../../../db/seed/resources";
 import { policies } from "../../../db/seed/policies";
 import { employees } from "../../../db/seed/employees";
 
-async function countRows(table: string): Promise<number> {
-  const { rows } = await pool.query(`SELECT COUNT(*)::int AS count FROM ${table}`);
+async function countRows(table: string, where?: string): Promise<number> {
+  const { rows } = await pool.query(
+    `SELECT COUNT(*)::int AS count FROM ${table}${where ? ` WHERE ${where}` : ""}`,
+  );
   return rows[0].count;
 }
 
@@ -29,6 +31,7 @@ async function deleteSeedRows(): Promise<void> {
   await pool.query("DELETE FROM dev_bearer_token WHERE employee_id = ANY($1::uuid[])", [
     employeeIds,
   ]);
+  await pool.query("DELETE FROM external_mapping WHERE source_system = 'app-qr'");
   await pool.query("DELETE FROM employee WHERE id = ANY($1::uuid[])", [employeeIds]);
   await pool.query("DELETE FROM policy WHERE id = ANY($1::uuid[])", [policyIds]);
   await pool.query("DELETE FROM resource WHERE id = ANY($1::uuid[])", [resourceIds]);
@@ -52,6 +55,7 @@ describe("seed data", () => {
       policiesInserted: 3,
       employeesInserted: 6,
       devBearerTokensInserted: 6,
+      externalMappingsInserted: 32,
     });
 
     expect(await countRows("office")).toBe(2);
@@ -59,6 +63,7 @@ describe("seed data", () => {
     expect(await countRows("policy")).toBe(3);
     expect(await countRows("employee")).toBe(6);
     expect(await countRows("dev_bearer_token")).toBe(6);
+    expect(await countRows("external_mapping", "source_system = 'app-qr'")).toBe(32);
   });
 
   it("seeds two offices with distinct IANA timezones", async () => {
@@ -77,6 +82,7 @@ describe("seed data", () => {
       policiesInserted: 0,
       employeesInserted: 0,
       devBearerTokensInserted: 0,
+      externalMappingsInserted: 0,
     });
 
     expect(await countRows("office")).toBe(2);
@@ -84,6 +90,16 @@ describe("seed data", () => {
     expect(await countRows("policy")).toBe(3);
     expect(await countRows("employee")).toBe(6);
     expect(await countRows("dev_bearer_token")).toBe(6);
+    expect(await countRows("external_mapping", "source_system = 'app-qr'")).toBe(32);
+  });
+
+  it("seeds one app-qr external_mapping row per resource, keyed by the resource's own id (TASK-17)", async () => {
+    const { rows } = await pool.query<{ entity_type: string; entity_id: string }>(
+      `SELECT entity_type, entity_id FROM external_mapping
+       WHERE source_system = 'app-qr' AND external_reference = $1`,
+      [resources[0]!.id],
+    );
+    expect(rows).toEqual([{ entity_type: "Resource", entity_id: resources[0]!.id }]);
   });
 
   it("returns a non-empty, sane result for available resources in an office on a given date", async () => {

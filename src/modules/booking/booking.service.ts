@@ -7,7 +7,8 @@ import {
   type ResourceType,
 } from "../resource-policy/resource.repository";
 import { getEffectivePolicy } from "../resource-policy/policy.service";
-import { insertBooking, type Booking } from "./booking.repository";
+import { computeEffectiveDeadline } from "../release-engine/deadline";
+import { findBookingById, insertBooking, type Booking } from "./booking.repository";
 import {
   isBookableResourceStatus,
   isValidBookingDate,
@@ -15,6 +16,7 @@ import {
   officeLocalToday,
 } from "./domain-rules";
 import {
+  BookingNotFoundError,
   EmployeeConflictError,
   InvalidBookingDateError,
   OutsideBookingWindowError,
@@ -88,4 +90,45 @@ export async function getAvailability(
   bookingDate: string,
 ): Promise<Resource[]> {
   return findAvailableResources(officeId, resourceType, bookingDate);
+}
+
+export interface BookingWithDeadline extends Booking {
+  checkInDeadline: string;
+}
+
+/**
+ * Booking status read (TASK-17, GET /bookings/:id). Scoped to the requesting
+ * identity's own employeeId — a booking that exists but belongs to someone
+ * else is indistinguishable from a nonexistent one (BookingNotFoundError),
+ * mirroring the existing no-cross-employee-enumeration boundary (TASK-15/PoC
+ * Selection C4). checkInDeadline reuses the Release Engine's own deadline
+ * computation (TASK-09) rather than duplicating it.
+ */
+export async function getBookingForEmployee(
+  bookingId: string,
+  employeeId: string,
+): Promise<BookingWithDeadline> {
+  const booking = await findBookingById(bookingId);
+  if (!booking || booking.employeeId !== employeeId) {
+    throw new BookingNotFoundError(bookingId);
+  }
+
+  const resource = await findResourceById(booking.resourceId);
+  if (!resource) {
+    throw new BookingNotFoundError(bookingId);
+  }
+
+  const office = await findOfficeById(resource.officeId);
+  if (!office) {
+    throw new BookingNotFoundError(bookingId);
+  }
+
+  const policy = await getEffectivePolicy(resource.officeId, booking.resourceType);
+  const checkInDeadline = computeEffectiveDeadline(
+    booking.bookingDate,
+    policy.releaseDeadlineLocal,
+    office.ianaTimezone,
+  ).toISOString();
+
+  return { ...booking, checkInDeadline };
 }
