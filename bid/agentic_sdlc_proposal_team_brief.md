@@ -195,19 +195,7 @@ flowchart TD
 - “CI, staged deployments, observability and automated feedback evals are already implemented.”
 - Any test count, task count or completion claim presented as current without a fresh check.
 
-## 9. Final collection checklist before handing off the slides
-
-- [ ] Retrieve one complete original Claude task session, preferably a finished task with review findings or another substantive decision.
-- [ ] Identify the original human plan approval and final disposition for that task, or state explicitly when unavailable.
-- [ ] Preserve the actual independent-review output and any correction loop.
-- [ ] Capture the associated task requirement, implementation diff and verification output.
-- [ ] Update the final completed-task and passing-test totals, including the observation timestamp.
-- [ ] Gather actual per-task timing, intervention and review-loop data if the sessions recorded them; state sample coverage and do not infer savings without a baseline.
-- [ ] Build a clearly annotated *actual Camp lifecycle* diagram.
-- [ ] Build a separate, clearly labelled *proposed full-delivery lifecycle* diagram.
-- [ ] Check that the slide's claim of approval is supported by an identifiable real human action; otherwise describe it as a defined control or a retrospective confirmation.
-
-## 10. Bottom line
+## 9. Bottom line
 
 **The SDLC material is sufficiently strong for the proposal team to build its slides now.** The critical improvement before final submission is not another long description of the workflow: it is a short, genuine execution story showing how one bounded task passed through actual agent work, verification, independent review and human decision-making. Pair that with the dated engineering results and a realistic evolution from conversational controls to persisted, enforced production controls.
 
