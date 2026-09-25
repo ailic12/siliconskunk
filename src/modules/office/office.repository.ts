@@ -17,3 +17,15 @@ export async function findOfficeById(officeId: string): Promise<Office | null> {
 
   return { id: row.id, ianaTimezone: row.iana_timezone, active: row.active };
 }
+
+/**
+ * Release Engine (TASK-09) sweeps every office in its own per-office pass
+ * (HLD §5.4); this feeds that outer loop.
+ */
+export async function findAllOffices(): Promise<Office[]> {
+  const { rows } = await pool.query<{ id: string; iana_timezone: string; active: boolean }>(
+    `SELECT id, iana_timezone, active FROM office`,
+  );
+
+  return rows.map((row) => ({ id: row.id, ianaTimezone: row.iana_timezone, active: row.active }));
+}

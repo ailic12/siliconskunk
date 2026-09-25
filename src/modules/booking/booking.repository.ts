@@ -130,3 +130,56 @@ export async function applyCheckIn(client: PoolClient, bookingId: string): Promi
   const row = rows[0];
   return row ? mapBookingRow(row) : null;
 }
+
+export interface ReleaseCandidate {
+  id: string;
+  bookingDate: string;
+  resourceType: ResourceType;
+}
+
+/**
+ * Release Engine (TASK-09) candidates for one office: every still-`Reserved`
+ * booking on one of that office's resources. The sweep groups these by
+ * (resourceType, bookingDate) to resolve one effective deadline per group
+ * rather than recomputing per booking row.
+ */
+export async function findReservedBookingCandidatesForOffice(
+  officeId: string,
+): Promise<ReleaseCandidate[]> {
+  const { rows } = await pool.query<{
+    id: string;
+    booking_date: string;
+    resource_type: ResourceType;
+  }>(
+    `SELECT b.id, b.booking_date, b.resource_type
+     FROM booking b
+     JOIN resource r ON r.id = b.resource_id
+     WHERE r.office_id = $1 AND b.status = 'Reserved'`,
+    [officeId],
+  );
+
+  return rows.map((row) => ({
+    id: row.id,
+    bookingDate: row.booking_date,
+    resourceType: row.resource_type,
+  }));
+}
+
+/**
+ * Conditional transition mirrors applyCheckIn: guards against a race with
+ * any other status change since the candidate read (BR-07/R-05), and 0 rows
+ * affected on a re-run is the sweep's retry-safety guarantee (HLD §5.4).
+ * Takes a PoolClient (not the pool) so TASK-11 can extend this same
+ * transaction to also insert a ReleaseNotice row, per its own scope.
+ */
+export async function applyRelease(client: PoolClient, bookingId: string): Promise<Booking | null> {
+  const { rows } = await client.query<BookingRow>(
+    `UPDATE booking
+     SET status = 'Released', updated_at = now()
+     WHERE id = $1 AND status = 'Reserved'
+     RETURNING id, resource_id, employee_id, booking_date, resource_type, status, created_at`,
+    [bookingId],
+  );
+  const row = rows[0];
+  return row ? mapBookingRow(row) : null;
+}

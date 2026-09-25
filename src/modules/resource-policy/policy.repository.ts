@@ -6,6 +6,7 @@ export interface Policy {
   officeId: string;
   resourceType: ResourceType | null;
   bookingWindowDays: number;
+  releaseDeadlineLocal: string;
 }
 
 /**
@@ -21,8 +22,9 @@ export async function findPoliciesForOfficeAndType(
     office_id: string;
     resource_type: ResourceType | null;
     booking_window_days: number;
+    release_deadline_local: string;
   }>(
-    `SELECT id, office_id, resource_type, booking_window_days
+    `SELECT id, office_id, resource_type, booking_window_days, release_deadline_local
      FROM policy
      WHERE office_id = $1
        AND (resource_type = $2 OR resource_type IS NULL)`,
@@ -34,5 +36,6 @@ export async function findPoliciesForOfficeAndType(
     officeId: row.office_id,
     resourceType: row.resource_type,
     bookingWindowDays: row.booking_window_days,
+    releaseDeadlineLocal: row.release_deadline_local,
   }));
 }
