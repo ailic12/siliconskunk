@@ -8,15 +8,20 @@ import { SystemClock, type Clock } from "../shared/clock";
 import { registerAuth } from "../shared/auth";
 import { registerBookingRoutes } from "../modules/booking/booking.routes";
 import { registerDemoUiRoutes } from "../demo-ui/demo-ui.routes";
+import { registerCheckinIngressRoutes } from "../modules/checkin-ingress";
 
 export function buildApp(clock: Clock = new SystemClock()): FastifyInstance {
   const app = Fastify({ logger: false });
 
-  // The demo page is registered directly on the root instance so it stays
-  // reachable without a bearer token. Auth and the booking routes are
-  // registered inside an encapsulated child context so the onRequest auth
-  // hook applies only to them, not to the whole app.
+  // The demo page and the Check-in Ingress API are registered directly on
+  // the root instance so they stay reachable without an employee bearer
+  // token. The Ingress uses its own per-provider credential check (HLD
+  // §7.1: "never Entra ID") — a separate trust boundary from employee auth,
+  // so it must not sit behind the onRequest hook below. Auth and the
+  // booking routes are registered inside an encapsulated child context so
+  // that hook applies only to them, not to the whole app.
   registerDemoUiRoutes(app);
+  registerCheckinIngressRoutes(app);
   app.register(async (protectedApp) => {
     registerAuth(protectedApp);
     registerBookingRoutes(protectedApp, clock);
