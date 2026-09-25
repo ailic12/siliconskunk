@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 3,
+  "kind": "history",
+  "harvestedAt": "2026-09-25T09:58:19.266Z",
+  "member": "Bojan Mihajilovic",
+  "repo": {
+    "name": "siliconskunk"
+  },
+  "sources": {
+    "claudeCode": {
+      "status": "empty",
+      "reason": "Claude Code sessions exist on this machine but none belong to this repo",
+      "filesScanned": 32,
+      "failures": []
+    },
+    "copilot": {
+      "status": "empty",
+      "reason": "no VS Code workspace on this machine maps to this repo",
+      "hashesSeen": 5
+    },
+    "codex": {
+      "status": "harvested",
+      "filesScanned": 3,
+      "sessionsMatched": 2,
+      "failures": []
+    },
+    "cursor": {
+      "status": "not-harvested",
+      "reason": "no Cursor user-data directory on this machine"
+    }
+  },
+  "chat": {
+    "claudeCode": [],
+    "copilot": [],
+    "codex": [
+      {
+        "sessionId": "01a0d2ff-526a-73c1-8e64-7ce91635030a",
+        "startedAt": "2026-09-24T10:39:30.888Z",
+        "endedAt": "2026-09-25T09:38:51.301Z",
+        "durationMinutes": 1379,
+        "branches": [],
+        "userPrompts": 28,
+        "promptLength": {
+          "count": 28,
+          "min": 34,
+          "median": 95,
+          "p90": 451,
+          "max": 1498,
+          "mean": 192,
+          "totalChars": 5366
+        },
+        "corrections": 2,
+        "assistantTurns": 64,
+        "toolCalls": {
+          "exec": 236
+        },
+        "toolCallTotal": 236,
+        "commands": {
+          "test": 0,
+          "buildOrLint": 0,
+          "destructive": 0,
+          "other": 236
+        },
+        "testRuns": [],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "unreadRecords": 0,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-24T10:39:31.618Z",
+                "text": "define phases and milestones in projects by looking at hld document in the project"
+              },
+              {
+                "at": "2026-09-24T10:48:38.155Z",
+                "text": "revise this by using smart office poc selection md document, candidate column"
+              },
+              {
+                "at": "2026-09-24T10:51:58.845Z",
+                "text": "extend document with estimations which roles are required for specific phase and how many person-days are necessary for implementation. Can you give this from point of view cloud architect"
+              },
+              {
+                "at": "2026-09-24T11:05:12.441Z",
+                "text": "define timeline based on this document and use 6months overall"
+              },
+              {
+                "at": "2026-09-24T11:16:44.860Z",
+                "text": "visualize timeline based on this document and mark milestones and also mark roles and people days needed for each phase of the project"
+              },
+              {
+                "at": "2026-09-24T11:20:27.420Z",
+                "text": "can you save these as images in the project"
+              }
+            ],
+            "offered": 28,
+            "truncated": true
+          },
+          "corrections": {
+            "kept": [
+              {
+                "at": "2026-09-25T08:14:57.703Z",
+                "text": "make following adjustments in slides: remove any mention of camp or two day engagement slide 5 remove pass/not tested column and any mention of pass / tested on the slide. Instead, give a more bid oriented slide with POC descriptions"
+              },
+              {
+                "at": "2026-09-25T08:44:05.520Z",
+                "text": "revert slide 4 to previous version"
+              }
+            ],
+            "offered": 2,
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sessionId": "01a0d2f8-967d-71b3-898b-ad8deffde0ec",
+        "startedAt": "2026-09-24T10:32:23.970Z",
+        "endedAt": "2026-09-24T10:37:30.753Z",
+        "durationMinutes": 5,
+        "branches": [],
+        "userPrompts": 3,
+        "promptLength": {
+          "count": 3,
+          "min": 39,
+          "median": 64,
+          "p90": 154,
+          "max": 154,
+          "mean": 86,
+          "totalChars": 257
+        },
+        "corrections": 0,
+        "assistantTurns": 4,
+        "toolCalls": {
+          "exec": 3
+        },
+        "toolCallTotal": 3,
+        "commands": {
+          "test": 0,
+          "buildOrLint": 0,
+          "destructive": 0,
+          "other": 3
+        },
+        "testRuns": [],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "unreadRecords": 0,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-24T10:32:24.560Z",
+                "text": "given the document /Users/bomi/Projects/siliconskunk/design/smart-office-hld.md define the roles necessary for the project to implement this architecture?"
+              },
+              {
+                "at": "2026-09-24T10:33:21.939Z",
+                "text": "change previous prompt but define roles with technologies needed"
+              },
+              {
+                "at": "2026-09-24T10:37:23.174Z",
+                "text": "can you define seniority for this roles"
+              }
+            ],
+            "offered": 3,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [],
+            "offered": 0,
+            "truncated": false
+          }
+        }
+      }
+    ],
+    "cursor": []
+  }
+}
