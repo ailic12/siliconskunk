@@ -1,4 +1,4 @@
-# TASK-15 — Manual Verification Evidence
+# TASK-16 — Manual Verification Evidence
 
 Recorded per [TASK-15-minimal-poc-demo-ui.md](TASK-15-minimal-poc-demo-ui.md)'s
 "Verification evidence" section. Run once, 2026-09-24, against a live

@@ -1,4 +1,4 @@
-# TASK-17 — Manual Verification Evidence
+# TASK-19 — Manual Verification Evidence
 
 Recorded per [TASK-17-capability2-demo-ui.md](TASK-17-capability2-demo-ui.md)'s
 "Verification evidence" section, mirroring [TASK-16](TASK-16-verification-evidence.md)'s
