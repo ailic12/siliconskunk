@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "kind": "history",
-  "harvestedAt": "2026-09-25T10:09:21.252Z",
+  "harvestedAt": "2026-09-25T11:35:41.521Z",
   "member": "MilosBjelcevic167",
   "repo": {
     "name": "siliconskunk"
@@ -9,8 +9,8 @@
   "sources": {
     "claudeCode": {
       "status": "harvested",
-      "filesScanned": 23,
-      "sessionsMatched": 19,
+      "filesScanned": 28,
+      "sessionsMatched": 24,
       "failures": []
     },
     "copilot": {
@@ -209,6 +209,96 @@
         }
       },
       {
+        "sessionId": "04e3cf67-3042-43e5-a41f-2d654fb2a06a",
+        "startedAt": "2026-09-25T10:46:52.473Z",
+        "endedAt": "2026-09-25T11:01:32.310Z",
+        "durationMinutes": 15,
+        "branches": [
+          "main"
+        ],
+        "userPrompts": 3,
+        "promptLength": {
+          "count": 3,
+          "min": 7,
+          "median": 8,
+          "p90": 18,
+          "max": 18,
+          "mean": 11,
+          "totalChars": 33
+        },
+        "corrections": 0,
+        "assistantTurns": 102,
+        "subagentRecords": 0,
+        "toolCalls": {
+          "Bash": 30,
+          "Read": 20,
+          "Write": 1,
+          "Edit": 4,
+          "Agent": 1
+        },
+        "toolCallTotal": 56,
+        "commands": {
+          "test": 6,
+          "buildOrLint": 2,
+          "destructive": 0,
+          "other": 22
+        },
+        "testRuns": [
+          {
+            "outcome": "fail",
+            "at": "2026-09-25T10:52:46.829Z"
+          },
+          {
+            "outcome": "fail",
+            "at": "2026-09-25T10:53:06.470Z"
+          },
+          {
+            "outcome": "fail",
+            "at": "2026-09-25T10:53:54.744Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T10:54:28.793Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T10:54:40.372Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T10:55:11.133Z"
+          }
+        ],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "injectedRecordsSkipped": 1,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-25T10:46:52.512Z",
+                "text": "TASK-12"
+              },
+              {
+                "at": "2026-09-25T10:50:05.666Z",
+                "text": "approved, continue"
+              },
+              {
+                "at": "2026-09-25T11:01:22.649Z",
+                "text": "approved"
+              }
+            ],
+            "offered": 3,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [],
+            "offered": 0,
+            "truncated": false
+          }
+        }
+      },
+      {
         "sessionId": "0d15a534-ed80-41dd-96f1-ba563b0cde84",
         "startedAt": "2026-09-24T13:06:54.395Z",
         "endedAt": "2026-09-24T13:25:28.298Z",
@@ -278,6 +368,60 @@
               }
             ],
             "offered": 3,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [],
+            "offered": 0,
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sessionId": "151dd929-8ad3-4cb9-a991-7697f4551dfd",
+        "startedAt": "2026-09-25T11:35:20.054Z",
+        "endedAt": "2026-09-25T11:35:38.514Z",
+        "durationMinutes": 0,
+        "branches": [
+          "main"
+        ],
+        "userPrompts": 1,
+        "promptLength": {
+          "count": 1,
+          "min": 138,
+          "median": 138,
+          "p90": 138,
+          "max": 138,
+          "mean": 138,
+          "totalChars": 138
+        },
+        "corrections": 0,
+        "assistantTurns": 8,
+        "subagentRecords": 0,
+        "toolCalls": {
+          "Bash": 3,
+          "Read": 1
+        },
+        "toolCallTotal": 4,
+        "commands": {
+          "test": 0,
+          "buildOrLint": 0,
+          "destructive": 0,
+          "other": 3
+        },
+        "testRuns": [],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "injectedRecordsSkipped": 0,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-25T11:35:20.097Z",
+                "text": "Can you check if chat history file contains proper data after running the script? I want to be sure that script got all needed information"
+              }
+            ],
+            "offered": 1,
             "truncated": false
           },
           "corrections": {
@@ -629,6 +773,197 @@
               }
             ],
             "offered": 1,
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sessionId": "6fcfff9c-6f91-402c-860e-bf5d974c2528",
+        "startedAt": "2026-09-25T11:01:57.307Z",
+        "endedAt": "2026-09-25T11:17:15.596Z",
+        "durationMinutes": 15,
+        "branches": [
+          "main"
+        ],
+        "userPrompts": 2,
+        "promptLength": {
+          "count": 2,
+          "min": 780,
+          "median": 6424,
+          "p90": 12067,
+          "max": 12067,
+          "mean": 6424,
+          "totalChars": 12847
+        },
+        "corrections": 1,
+        "assistantTurns": 102,
+        "subagentRecords": 0,
+        "toolCalls": {
+          "Bash": 19,
+          "Read": 28,
+          "Agent": 3,
+          "AskUserQuestion": 1,
+          "Write": 1,
+          "Edit": 15
+        },
+        "toolCallTotal": 67,
+        "commands": {
+          "test": 2,
+          "buildOrLint": 0,
+          "destructive": 0,
+          "other": 17
+        },
+        "testRuns": [
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T11:06:32.366Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T11:06:38.006Z"
+          }
+        ],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "injectedRecordsSkipped": 0,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-25T11:01:57.349Z",
+                "text": "We are developing the ZRS Camp 2026 Smart Office PoC using our approved Agentic SDLC. Your task is to analyse the existing repository and create: TASK-18 — Smart Office Demo UI: Notification Dispatch This is a PLANNING task only. DO NOT implement code. OBJECTIVE Extend our exist…"
+              },
+              {
+                "at": "2026-09-25T11:13:39.934Z",
+                "text": "Apply two final implementation clarifications to TASK-18: 1. Ensure notification polling resumes when the associated booking transitions to Released, even when the previous Confirmation notification already reached Sent. 2. Make the provider-failure recovery demo deterministic: …"
+              }
+            ],
+            "offered": 2,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [
+              {
+                "at": "2026-09-25T11:01:57.349Z",
+                "text": "We are developing the ZRS Camp 2026 Smart Office PoC using our approved Agentic SDLC. Your task is to analyse the existing repository and create: TASK-18 — Smart Office Demo UI: Notification Dispatch This is a PLANNING task only. DO NOT implement code. OBJECTIVE Extend our exist…"
+              }
+            ],
+            "offered": 1,
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sessionId": "702c543f-d3dc-4a38-a0ac-708ebff4d7c2",
+        "startedAt": "2026-09-25T11:18:21.391Z",
+        "endedAt": "2026-09-25T11:35:40.597Z",
+        "durationMinutes": 17,
+        "branches": [
+          "main"
+        ],
+        "userPrompts": 2,
+        "promptLength": {
+          "count": 2,
+          "min": 7,
+          "median": 13,
+          "p90": 18,
+          "max": 18,
+          "mean": 13,
+          "totalChars": 25
+        },
+        "corrections": 0,
+        "assistantTurns": 194,
+        "subagentRecords": 0,
+        "toolCalls": {
+          "Bash": 58,
+          "Read": 21,
+          "mcp__ccd_session__mark_chapter": 1,
+          "Edit": 26,
+          "Write": 7,
+          "mcp__Claude_Preview__preview_start": 1
+        },
+        "toolCallTotal": 114,
+        "commands": {
+          "test": 13,
+          "buildOrLint": 7,
+          "destructive": 0,
+          "other": 39
+        },
+        "testRuns": [
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T11:19:15.882Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T11:19:22.719Z"
+          },
+          {
+            "outcome": "fail",
+            "at": "2026-09-25T11:25:36.347Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T11:25:50.355Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T11:26:19.860Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T11:27:26.680Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T11:28:24.575Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T11:31:29.415Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T11:31:52.225Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T11:32:37.727Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T11:32:46.987Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T11:33:10.361Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T11:34:21.866Z"
+          }
+        ],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "injectedRecordsSkipped": 1,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-25T11:18:21.445Z",
+                "text": "TASK-18"
+              },
+              {
+                "at": "2026-09-25T11:21:19.707Z",
+                "text": "approved, continue"
+              }
+            ],
+            "offered": 2,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [],
+            "offered": 0,
             "truncated": false
           }
         }
@@ -1207,6 +1542,105 @@
           "corrections": {
             "kept": [],
             "offered": 0,
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sessionId": "c7b29416-f940-4123-8e05-5980a275fd26",
+        "startedAt": "2026-09-25T10:11:34.851Z",
+        "endedAt": "2026-09-25T10:46:31.352Z",
+        "durationMinutes": 35,
+        "branches": [
+          "main"
+        ],
+        "userPrompts": 4,
+        "promptLength": {
+          "count": 4,
+          "min": 7,
+          "median": 9,
+          "p90": 18,
+          "max": 18,
+          "mean": 11,
+          "totalChars": 42
+        },
+        "corrections": 1,
+        "assistantTurns": 206,
+        "subagentRecords": 0,
+        "toolCalls": {
+          "Bash": 44,
+          "Read": 49,
+          "Write": 7,
+          "Edit": 17,
+          "Agent": 1
+        },
+        "toolCallTotal": 118,
+        "commands": {
+          "test": 6,
+          "buildOrLint": 7,
+          "destructive": 0,
+          "other": 31
+        },
+        "testRuns": [
+          {
+            "outcome": "fail",
+            "at": "2026-09-25T10:26:46.704Z"
+          },
+          {
+            "outcome": "fail",
+            "at": "2026-09-25T10:28:34.074Z"
+          },
+          {
+            "outcome": "fail",
+            "at": "2026-09-25T10:32:15.546Z"
+          },
+          {
+            "outcome": "fail",
+            "at": "2026-09-25T10:34:42.813Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T10:37:02.931Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T10:39:03.413Z"
+          }
+        ],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "injectedRecordsSkipped": 1,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-25T10:11:34.887Z",
+                "text": "TASK-11"
+              },
+              {
+                "at": "2026-09-25T10:20:30.268Z",
+                "text": "approved, continue"
+              },
+              {
+                "at": "2026-09-25T10:26:00.423Z",
+                "text": "Try again"
+              },
+              {
+                "at": "2026-09-25T10:46:20.330Z",
+                "text": "approved"
+              }
+            ],
+            "offered": 4,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [
+              {
+                "at": "2026-09-25T10:26:00.423Z",
+                "text": "Try again"
+              }
+            ],
+            "offered": 1,
             "truncated": false
           }
         }

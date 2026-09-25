@@ -1,4 +1,4 @@
-import type { BookingWithDeadline, Booking, Resource, ResourceType } from "./types";
+import type { BookingWithDeadline, Booking, NotificationSummary, Resource, ResourceType } from "./types";
 
 export interface ApiOk<T> {
   ok: true;
@@ -58,6 +58,15 @@ export function getBooking(
   bookingId: string,
 ): Promise<ApiResult<BookingWithDeadline>> {
   return apiFetch(`/bookings/${bookingId}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+}
+
+export function getBookingNotifications(
+  token: string,
+  bookingId: string,
+): Promise<ApiResult<{ notifications: NotificationSummary[] }>> {
+  return apiFetch(`/bookings/${bookingId}/notifications`, {
     headers: { Authorization: `Bearer ${token}` },
   });
 }

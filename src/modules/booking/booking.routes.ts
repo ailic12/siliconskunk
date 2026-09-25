@@ -1,6 +1,11 @@
 import type { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import type { Clock } from "../../shared/clock";
-import { createBooking, getAvailability, getBookingForEmployee } from "./booking.service";
+import {
+  createBooking,
+  getAvailability,
+  getBookingForEmployee,
+  getNotificationsForBooking,
+} from "./booking.service";
 import {
   BookingNotFoundError,
   EmployeeConflictError,
@@ -138,6 +143,27 @@ export function registerBookingRoutes(app: FastifyInstance, clock: Clock): void 
       try {
         const booking = await getBookingForEmployee(id, request.identity.employeeId);
         return reply.status(200).send(booking);
+      } catch (err) {
+        if (err instanceof BookingNotFoundError) {
+          return reply.status(404).send({ error: "not_found", message: err.message });
+        }
+        throw err;
+      }
+    },
+  );
+
+  app.get(
+    "/bookings/:id/notifications",
+    async (request: FastifyRequest<{ Params: { id: string } }>, reply: FastifyReply) => {
+      const { id } = request.params;
+
+      if (!isUuid(id)) {
+        return reply.status(404).send({ error: "not_found", message: "Booking not found." });
+      }
+
+      try {
+        const notifications = await getNotificationsForBooking(id, request.identity.employeeId);
+        return reply.status(200).send({ notifications });
       } catch (err) {
         if (err instanceof BookingNotFoundError) {
           return reply.status(404).send({ error: "not_found", message: err.message });

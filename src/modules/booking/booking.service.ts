@@ -10,7 +10,7 @@ import {
 import { getEffectivePolicy } from "../resource-policy/policy.service";
 import { computeEffectiveDeadline } from "../release-engine/deadline";
 import { findBookingById, insertBooking, type Booking } from "./booking.repository";
-import { insertNotificationIntent } from "../notification";
+import { insertNotificationIntent, findNotificationsByBookingId, type Notification } from "../notification";
 import {
   isBookableResourceStatus,
   isValidBookingDate,
@@ -142,4 +142,42 @@ export async function getBookingForEmployee(
   ).toISOString();
 
   return { ...booking, checkInDeadline };
+}
+
+export interface NotificationSummary {
+  id: string;
+  type: string;
+  channel: string;
+  status: Notification["status"];
+  attempts: number;
+  sentAt: string | null;
+}
+
+/**
+ * Notification status read (TASK-18, GET /bookings/:id/notifications).
+ * Reuses the exact same ownership boundary as getBookingForEmployee — a
+ * booking that exists but belongs to someone else is indistinguishable from
+ * a nonexistent one. Deliberately narrows Notification down to the
+ * demo-relevant fields only: excludes leaseOwner/leaseExpiresAt/dedupKey
+ * (internal worker mechanics, never exposed to the client) and bookingId
+ * (redundant with the URL param).
+ */
+export async function getNotificationsForBooking(
+  bookingId: string,
+  employeeId: string,
+): Promise<NotificationSummary[]> {
+  const booking = await findBookingById(bookingId);
+  if (!booking || booking.employeeId !== employeeId) {
+    throw new BookingNotFoundError(bookingId);
+  }
+
+  const notifications = await findNotificationsByBookingId(bookingId);
+  return notifications.map((n) => ({
+    id: n.id,
+    type: n.type,
+    channel: n.channel,
+    status: n.status,
+    attempts: n.attempts,
+    sentAt: n.sentAt,
+  }));
 }

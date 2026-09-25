@@ -10,8 +10,8 @@ export function Timeline({ events }: TimelineProps): ReactElement {
     <fieldset>
       <legend>Demo activity timeline</legend>
       <p className="hint">
-        Observed this session only — not a persisted audit trail, and does not imply a
-        notification was sent (Capability 3 is not implemented in this PoC).
+        Observed this session only — not a persisted audit trail. Notification status is
+        observed via GET /bookings/:id/notifications, never implied by booking success.
       </p>
       {events.length === 0 ? (
         <p>No activity yet.</p>

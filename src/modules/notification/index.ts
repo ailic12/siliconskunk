@@ -1,4 +1,10 @@
-export { insertNotificationIntent, claimNext, markSent, recordFailure } from "./notification.repository";
+export {
+  insertNotificationIntent,
+  claimNext,
+  markSent,
+  recordFailure,
+  findNotificationsByBookingId,
+} from "./notification.repository";
 export type { Notification, NotificationStatus } from "./notification.repository";
 export { runNotificationWorker } from "./notification.service";
 export type { NotificationWorkerOptions } from "./notification.service";

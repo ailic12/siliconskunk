@@ -1,4 +1,5 @@
 import type { PoolClient } from "pg";
+import { pool } from "../../shared/db";
 
 export type NotificationStatus = "Pending" | "Sending" | "Sent" | "Failed";
 
@@ -119,6 +120,24 @@ export async function markSent(client: PoolClient, id: string, leaseOwner: strin
      WHERE id = $1 AND status = 'Sending' AND lease_owner = $2`,
     [id, leaseOwner],
   );
+}
+
+/**
+ * Booking-scoped notification read (TASK-18): plain lookup, ownership
+ * enforcement is the caller's responsibility (booking.service.ts), mirroring
+ * findBookingById's own division of concerns. A booking has at most two rows
+ * (Confirmation, ReleaseNotice) — no ordering guarantee by insertion time
+ * (notification has no created_at column), so callers must distinguish rows
+ * by `type`, not array position.
+ */
+export async function findNotificationsByBookingId(bookingId: string): Promise<Notification[]> {
+  const { rows } = await pool.query<NotificationRow>(
+    `SELECT id, booking_id, type, channel, dedup_key, status, lease_owner, lease_expires_at, sent_at, attempts
+     FROM notification
+     WHERE booking_id = $1`,
+    [bookingId],
+  );
+  return rows.map(mapRow);
 }
 
 /**

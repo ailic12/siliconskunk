@@ -25,6 +25,13 @@ export interface StartAppOptions {
   port?: number;
   sweepIntervalMs?: number;
   notificationWorkerIntervalMs?: number;
+  /**
+   * Demo-only, boot-time control (TASK-18): forces the mocked notification
+   * provider to always fail, letting a test or a locally-restarted process
+   * deterministically exercise the retry/backoff and terminal-failure paths.
+   * No HTTP exposure — set via NOTIFICATION_DEMO_FORCE_FAIL or this option.
+   */
+  forceNotificationFailure?: boolean;
 }
 
 export function buildApp(clock: Clock = new SystemClock()): FastifyInstance {
@@ -74,6 +81,8 @@ export async function startApp(options: StartAppOptions = {}): Promise<FastifyIn
   const sweepIntervalMs = options.sweepIntervalMs ?? DEFAULT_RELEASE_SWEEP_INTERVAL_MS;
   const notificationWorkerIntervalMs =
     options.notificationWorkerIntervalMs ?? DEFAULT_NOTIFICATION_WORKER_INTERVAL_MS;
+  const forceNotificationFailure =
+    options.forceNotificationFailure ?? process.env.NOTIFICATION_DEMO_FORCE_FAIL === "true";
 
   const app = buildApp(clock);
   await app.listen({ port, host: "0.0.0.0" });
@@ -86,7 +95,9 @@ export async function startApp(options: StartAppOptions = {}): Promise<FastifyIn
     runReleaseSweep(clock).catch((err) => app.log?.error?.(err));
   }, sweepIntervalMs).unref();
 
-  const notificationChannel = new FakeNotificationChannel();
+  const notificationChannel = new FakeNotificationChannel(
+    forceNotificationFailure ? { shouldFail: () => true } : {},
+  );
   setInterval(() => {
     runNotificationWorker(clock, notificationChannel).catch((err) => app.log?.error?.(err));
   }, notificationWorkerIntervalMs).unref();

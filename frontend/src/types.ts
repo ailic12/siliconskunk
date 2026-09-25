@@ -43,12 +43,27 @@ export interface TrackedBooking {
   resourceName: string;
 }
 
+export type NotificationStatus = "Pending" | "Sending" | "Sent" | "Failed";
+
+/** GET /bookings/:id/notifications row (TASK-18) — verbatim server response,
+ * never frontend-computed. Deliberately excludes internal worker mechanics
+ * (leaseOwner, leaseExpiresAt, dedupKey) — the server never sends them. */
+export interface NotificationSummary {
+  id: string;
+  type: string;
+  channel: string;
+  status: NotificationStatus;
+  attempts: number;
+  sentAt: string | null;
+}
+
 export type TimelineEventKind =
   | "booking_created"
   | "checkin_submitted"
   | "checkin_confirmed"
   | "release_confirmed"
   | "availability_refreshed"
+  | "notification_status_observed"
   | "error";
 
 export interface TimelineEvent {

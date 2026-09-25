@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState, type ReactElement } from "react";
+import { useCallback, useEffect, useRef, useState, type ReactElement } from "react";
 import { submitAppQrCheckin } from "./api";
 import { describeApiError } from "./error-messages";
 import { useBookingPolling } from "./useBookingPolling";
+import { NotificationPanel } from "./NotificationPanel";
 import type { TimelineEventKind, TrackedBooking } from "./types";
 
 interface BookingCardProps {
@@ -40,6 +41,11 @@ export function BookingCard({ tracked, onTimelineEvent }: BookingCardProps): Rea
       );
     }
   }, [pollState, booking.status, booking.id, booking.bookingDate, onTimelineEvent, tracked.ownerName, tracked.resourceName]);
+
+  const onNotificationTerminalObserved = useCallback(
+    (message: string) => onTimelineEvent("notification_status_observed", message),
+    [onTimelineEvent],
+  );
 
   async function simulateCheckin(): Promise<void> {
     setCheckinState("submitting");
@@ -112,6 +118,13 @@ export function BookingCard({ tracked, onTimelineEvent }: BookingCardProps): Rea
         <p className="pending">Check-in accepted (202) — awaiting confirmation…</p>
       )}
       {checkinState === "error" && <p className="error">{checkinError}</p>}
+
+      <NotificationPanel
+        bookingId={booking.id}
+        ownerToken={tracked.ownerToken}
+        bookingStatus={booking.status}
+        onTerminalObserved={onNotificationTerminalObserved}
+      />
     </div>
   );
 }
