@@ -59,6 +59,24 @@ describe("Booking creation API", () => {
   });
 
   afterAll(async () => {
+    // TASK-11: every booking now has a same-transaction notification row
+    // (notification.booking_id has no cascading delete), so it must be
+    // cleared before the booking rows it references can be deleted.
+    await pool.query(
+      `DELETE FROM notification WHERE booking_id IN (
+         SELECT id FROM booking WHERE resource_id = ANY($1::uuid[]) AND booking_date >= $2
+       )`,
+      [
+        [
+          RESOURCE_CONFLICT_TARGET,
+          EMPLOYEE_CONFLICT_RESOURCE_A,
+          EMPLOYEE_CONFLICT_RESOURCE_B,
+          UNBOOKABLE_RESOURCE,
+          AVAILABILITY_RESOURCE,
+        ],
+        FAKE_TODAY,
+      ],
+    );
     await pool.query(
       `DELETE FROM booking WHERE resource_id = ANY($1::uuid[]) AND booking_date >= $2`,
       [

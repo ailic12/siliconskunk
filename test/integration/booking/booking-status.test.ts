@@ -56,6 +56,15 @@ describe("GET /bookings/:id (TASK-17)", () => {
   });
 
   afterAll(async () => {
+    // TASK-11: every booking now has a same-transaction notification row
+    // (notification.booking_id has no cascading delete), so it must be
+    // cleared before the booking row it references can be deleted.
+    await pool.query(
+      `DELETE FROM notification WHERE booking_id IN (
+         SELECT id FROM booking WHERE resource_id = $1 AND booking_date = $2
+       )`,
+      [STATUS_RESOURCE, BOOKING_DATE],
+    );
     await pool.query(`DELETE FROM booking WHERE resource_id = $1 AND booking_date = $2`, [
       STATUS_RESOURCE,
       BOOKING_DATE,

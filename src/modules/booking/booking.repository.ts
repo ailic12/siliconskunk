@@ -18,15 +18,20 @@ export interface Booking {
  * Relies entirely on the two partial unique indexes from TASK-02 for
  * conflict prevention (HLD §5.2) — no application-level check-then-insert.
  * A unique-violation (23505) is left to propagate to the caller, which maps
- * it via `err.constraint`.
+ * it via `err.constraint`. Takes a PoolClient (not the pool) so TASK-11 can
+ * extend this same transaction to also insert a Confirmation notification
+ * row, per its own scope.
  */
-export async function insertBooking(params: {
-  resourceId: string;
-  employeeId: string;
-  bookingDate: string;
-  resourceType: ResourceType;
-}): Promise<Booking> {
-  const { rows } = await pool.query<{
+export async function insertBooking(
+  client: PoolClient,
+  params: {
+    resourceId: string;
+    employeeId: string;
+    bookingDate: string;
+    resourceType: ResourceType;
+  },
+): Promise<Booking> {
+  const { rows } = await client.query<{
     id: string;
     resource_id: string;
     employee_id: string;

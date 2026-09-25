@@ -75,6 +75,15 @@ describe("Booking concurrency adversarial tests (TASK-05)", () => {
   });
 
   afterAll(async () => {
+    // TASK-11: every booking now has a same-transaction notification row
+    // (notification.booking_id has no cascading delete), so it must be
+    // cleared before the booking rows it references can be deleted.
+    await pool.query(
+      `DELETE FROM notification WHERE booking_id IN (
+         SELECT id FROM booking WHERE resource_id = ANY($1::uuid[]) AND booking_date >= $2
+       )`,
+      [[RESOURCE_RACE_TARGET, EMPLOYEE_RACE_RESOURCE_A, EMPLOYEE_RACE_RESOURCE_B], FAKE_TODAY],
+    );
     await pool.query(
       `DELETE FROM booking WHERE resource_id = ANY($1::uuid[]) AND booking_date >= $2`,
       [[RESOURCE_RACE_TARGET, EMPLOYEE_RACE_RESOURCE_A, EMPLOYEE_RACE_RESOURCE_B], FAKE_TODAY],

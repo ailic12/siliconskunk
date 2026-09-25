@@ -1,4 +1,5 @@
 import type { Clock } from "../../shared/clock";
+import { withTransaction } from "../../shared/db";
 import { findOfficeById } from "../office/office.repository";
 import {
   findResourceById,
@@ -9,6 +10,7 @@ import {
 import { getEffectivePolicy } from "../resource-policy/policy.service";
 import { computeEffectiveDeadline } from "../release-engine/deadline";
 import { findBookingById, insertBooking, type Booking } from "./booking.repository";
+import { insertNotificationIntent } from "../notification";
 import {
   isBookableResourceStatus,
   isValidBookingDate,
@@ -69,11 +71,20 @@ export async function createBooking(
   }
 
   try {
-    return await insertBooking({
-      resourceId: resource.id,
-      employeeId,
-      bookingDate,
-      resourceType: resource.type,
+    return await withTransaction(async (client) => {
+      const booking = await insertBooking(client, {
+        resourceId: resource.id,
+        employeeId,
+        bookingDate,
+        resourceType: resource.type,
+      });
+      await insertNotificationIntent(client, {
+        bookingId: booking.id,
+        type: "Confirmation",
+        channel: "Teams",
+        dedupKey: `Confirmation:${booking.id}`,
+      });
+      return booking;
     });
   } catch (err) {
     if (isPgUniqueViolation(err)) {

@@ -81,6 +81,12 @@ describe("Release Engine sweep (TASK-09)", () => {
   });
 
   afterAll(async () => {
+    // TASK-11: every release now has a same-transaction notification row
+    // (notification.booking_id has no cascading delete), so it must be
+    // cleared before the booking rows it references can be deleted.
+    await pool.query(`DELETE FROM notification WHERE booking_id = ANY($1::uuid[])`, [
+      [dueBookingId, notDueBookingId],
+    ]);
     await pool.query(`DELETE FROM booking WHERE id = ANY($1::uuid[])`, [
       [dueBookingId, notDueBookingId],
     ]);

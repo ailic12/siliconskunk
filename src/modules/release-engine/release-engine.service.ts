@@ -8,6 +8,7 @@ import {
   type Booking,
   type ReleaseCandidate,
 } from "../booking/booking.repository";
+import { insertNotificationIntent } from "../notification";
 import { computeEffectiveDeadline } from "./deadline";
 
 function groupByTypeAndDate(candidates: ReleaseCandidate[]): Map<string, ReleaseCandidate[]> {
@@ -52,7 +53,18 @@ export async function runReleaseSweep(clock: Clock): Promise<Booking[]> {
       if (now < deadline) continue;
 
       for (const candidate of group) {
-        const result = await withTransaction((client) => applyRelease(client, candidate.id));
+        const result = await withTransaction(async (client) => {
+          const booking = await applyRelease(client, candidate.id);
+          if (booking) {
+            await insertNotificationIntent(client, {
+              bookingId: booking.id,
+              type: "ReleaseNotice",
+              channel: "Teams",
+              dedupKey: `ReleaseNotice:${booking.id}`,
+            });
+          }
+          return booking;
+        });
         if (result) released.push(result);
       }
     }

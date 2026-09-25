@@ -103,6 +103,12 @@ describe("Application startup wiring (TASK-17, black-box)", () => {
     await pool.query(`DELETE FROM checkin_evidence WHERE external_event_id = $1`, [
       `startup-checkin-${checkinBookingId}`,
     ]);
+    // TASK-11: every booking now has a same-transaction notification row
+    // (notification.booking_id has no cascading delete), so it must be
+    // cleared before the booking rows it references can be deleted.
+    await pool.query(`DELETE FROM notification WHERE booking_id = ANY($1::uuid[])`, [
+      [checkinBookingId, releaseBookingId],
+    ]);
     await pool.query(`DELETE FROM booking WHERE id = ANY($1::uuid[])`, [
       [checkinBookingId, releaseBookingId],
     ]);

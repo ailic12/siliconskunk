@@ -5,3 +5,5 @@ dist/
 coverage/
 .env
 *.log
+collect-history.mjs
+.DS_Store

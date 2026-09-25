@@ -5,8 +5,15 @@ import { pool } from "../../../src/shared/db";
 
 const execFileAsync = promisify(execFile);
 
-async function migrate(direction: "up" | "down") {
-  await execFileAsync("npx", [
+/**
+ * `count` is only relevant to "down": node-pg-migrate's default is to revert
+ * just the single most recent migration, but this suite's reversibility
+ * check (below) needs every migration reverted, regardless of how many exist
+ * (TASK-11 added a second migration file) — a fixed large number is more
+ * robust to future migrations than hard-coding the current count.
+ */
+async function migrate(direction: "up" | "down", count?: number) {
+  const args = [
     "node-pg-migrate",
     direction,
     "--migrations-dir",
@@ -15,7 +22,11 @@ async function migrate(direction: "up" | "down") {
     "tsconfig.base.json",
     "--envPath",
     ".env",
-  ]);
+  ];
+  if (direction === "down" && count !== undefined) {
+    args.push(String(count));
+  }
+  await execFileAsync("npx", args);
 }
 
 describe("core domain schema migrations", () => {
@@ -77,7 +88,7 @@ describe("core domain schema migrations", () => {
   });
 
   it("is reversible: down removes all core domain tables, up restores them", async () => {
-    await migrate("down");
+    await migrate("down", 1000);
 
     const { rows: afterDown } = await pool.query(
       `SELECT table_name FROM information_schema.tables

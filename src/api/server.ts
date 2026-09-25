@@ -13,13 +13,18 @@ import { appQrAdapter } from "../modules/checkin-ingress/adapters/app-qr.adapter
 import { testHarnessAdapter } from "../modules/checkin-ingress/adapters/test-harness.adapter";
 import { registerCheckinGatewayWorker } from "../modules/checkin-gateway";
 import { runReleaseSweep } from "../modules/release-engine";
+import { runNotificationWorker, FakeNotificationChannel } from "../modules/notification";
 
 const DEFAULT_RELEASE_SWEEP_INTERVAL_MS = Number(process.env.RELEASE_SWEEP_INTERVAL_MS ?? 5000);
+const DEFAULT_NOTIFICATION_WORKER_INTERVAL_MS = Number(
+  process.env.NOTIFICATION_WORKER_INTERVAL_MS ?? 5000,
+);
 
 export interface StartAppOptions {
   clock?: Clock;
   port?: number;
   sweepIntervalMs?: number;
+  notificationWorkerIntervalMs?: number;
 }
 
 export function buildApp(clock: Clock = new SystemClock()): FastifyInstance {
@@ -67,6 +72,8 @@ export async function startApp(options: StartAppOptions = {}): Promise<FastifyIn
   const clock = options.clock ?? new SystemClock();
   const port = options.port ?? Number(process.env.PORT ?? 3000);
   const sweepIntervalMs = options.sweepIntervalMs ?? DEFAULT_RELEASE_SWEEP_INTERVAL_MS;
+  const notificationWorkerIntervalMs =
+    options.notificationWorkerIntervalMs ?? DEFAULT_NOTIFICATION_WORKER_INTERVAL_MS;
 
   const app = buildApp(clock);
   await app.listen({ port, host: "0.0.0.0" });
@@ -78,6 +85,11 @@ export async function startApp(options: StartAppOptions = {}): Promise<FastifyIn
   setInterval(() => {
     runReleaseSweep(clock).catch((err) => app.log?.error?.(err));
   }, sweepIntervalMs).unref();
+
+  const notificationChannel = new FakeNotificationChannel();
+  setInterval(() => {
+    runNotificationWorker(clock, notificationChannel).catch((err) => app.log?.error?.(err));
+  }, notificationWorkerIntervalMs).unref();
 
   return app;
 }

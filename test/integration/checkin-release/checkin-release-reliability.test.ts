@@ -231,6 +231,12 @@ describe("Check-in/Release reliability test suite (TASK-10)", () => {
   afterAll(async () => {
     await pool.query(`DELETE FROM checkin_evidence WHERE source_system = $1`, [SOURCE_SYSTEM]);
     await pool.query(`DELETE FROM external_mapping WHERE source_system = $1`, [SOURCE_SYSTEM]);
+    // TASK-11: every booking now has a same-transaction notification row
+    // (notification.booking_id has no cascading delete), so it must be
+    // cleared before the booking rows it references can be deleted.
+    await pool.query(`DELETE FROM notification WHERE booking_id = ANY($1::uuid[])`, [
+      [dupCheckinBookingId, sweepRaceBookingId, lateCheckinBookingId, availabilityBookingId],
+    ]);
     await pool.query(`DELETE FROM booking WHERE id = ANY($1::uuid[])`, [
       [dupCheckinBookingId, sweepRaceBookingId, lateCheckinBookingId, availabilityBookingId],
     ]);
