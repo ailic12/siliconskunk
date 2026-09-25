@@ -1,5 +1,6 @@
 import PgBoss from "pg-boss";
 import type { CheckInEvent } from "../../modules/checkin-contract";
+import { parseCheckInEvent } from "../../modules/checkin-contract";
 
 export const CHECKIN_EVENTS_QUEUE = "checkin-events";
 
@@ -24,6 +25,24 @@ async function getQueue(): Promise<PgBoss> {
 export async function sendCheckinEvent(event: CheckInEvent): Promise<string | null> {
   const queue = await getQueue();
   return queue.send(CHECKIN_EVENTS_QUEUE, event);
+}
+
+/**
+ * Subscribes a handler to CHECKIN_EVENTS_QUEUE. Each job's data is
+ * re-validated through parseCheckInEvent before the handler runs — defense
+ * in depth, since only the Ingress API (already validated) is expected to
+ * enqueue onto this queue. A handler that throws leaves the job for pg-boss
+ * to retry, rather than swallowing the failure.
+ */
+export async function workCheckinEvents(
+  handler: (event: CheckInEvent) => Promise<void>,
+): Promise<string> {
+  const queue = await getQueue();
+  return queue.work(CHECKIN_EVENTS_QUEUE, async (jobs) => {
+    for (const job of jobs) {
+      await handler(parseCheckInEvent(job.data));
+    }
+  });
 }
 
 export async function stopQueue(): Promise<void> {
