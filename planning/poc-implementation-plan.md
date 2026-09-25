@@ -15,6 +15,8 @@ Scope: implementation planning only for the three functionalities selected in th
 
 **Revision 4** — human-approved presentation-layer addition, plus a correction to this document itself: (1) this document had not been updated when TASK-15 (Minimal PoC Demo UI, Capability 1) and TASK-16 (its verification evidence) were implemented and completed — both are now reflected below as delivered work, not silently left out; (2) TASK-17 (Smart Office Demo UI: Check-in & Automatic Release) is added — a human-approved presentation-layer extension of TASK-15 that makes the already-implemented and already-verified Capability 2 (TASK-06–10) observable in a browser. TASK-17 introduces React+Vite+TypeScript as frontend tooling and three minimal backend additions (a `GET /bookings/:id` read endpoint, `external_mapping` seed fixture data, and in-process worker/scheduler wiring at boot) — all explicitly human-approved during this revision's planning session (2026-09-25), documented in full in [TASK-17](tasks/TASK-17-capability2-demo-ui.md). This is **not** a fourth PoC functionality: no new business capability, domain rule, or state machine is introduced; the original three-functionality scope (Booking Creation, Automatic Release, Notification Dispatch) and every prior architecture/HLD/PoC-Selection decision are unchanged. Task count: 14 → 17.
 
+**Revision 5** — human-approved presentation-layer addition, plus a status correction: (1) **TASK-17's status is corrected from "Proposed, Revision 4" to "Completed"** — independent verification during this revision's planning session (source code read directly, `npm test`/`npm run test:frontend` re-run live, 103/14 tests passing, manual verification evidence already recorded in [TASK-17-verification-evidence.md](tasks/TASK-17-verification-evidence.md)) confirms TASK-17 was fully implemented after this document was last updated; TASK-17's own task file is left unmodified as an accurate record of what was known when it was written. (2) **TASK-18 (Smart Office Demo UI: Notification Dispatch) is added** — a human-approved presentation-layer extension of TASK-17 that makes the already-implemented and already-verified Capability 3 (TASK-11/12) observable in a browser, closing the loop so all three approved capabilities are demonstrable from one React application. TASK-18 bundles two minimal backend additions (a `GET /bookings/:id/notifications` read endpoint and a `NOTIFICATION_DEMO_FORCE_FAIL` boot-time env var, no runtime HTTP toggle) — both explicitly human-approved during this revision's planning session (2026-09-25), documented in full in [TASK-18](tasks/TASK-18-notification-demo-ui.md). Independent discovery also found that TASK-11 and TASK-12 (Notification Dispatch) are themselves already implemented and fully passing — this revision does not change their scope, only reflects their completion. This is **not** a fourth or fifth PoC functionality: no new business capability, domain rule, notification type, or delivery guarantee is introduced; the original three-functionality scope and every prior architecture/HLD/PoC-Selection decision are unchanged. Task count: 17 → 18.
+
 ---
 
 ## 1. Implementation Assumptions and Decisions
@@ -35,6 +37,7 @@ Scope: implementation planning only for the three functionalities selected in th
 | 12 | **Check-in Gateway depends on the canonical `CheckInEvent` contract and the queue only — never imports or references a concrete adapter.** Adapters are upstream producers of canonical events; the Gateway is adapter-agnostic by construction, and its tests enqueue canonical `CheckInEvent` payloads directly rather than going through an adapter. | Human review correction; also the direct implementation of HLD AD-07 (canonical contract + adapter pattern, vendor-neutral core) and validation item 8 ("two adapters use the same contract without changing Booking-domain code") — coupling the Gateway to adapter code would undermine the very thing this functionality is supposed to prove |
 | 13 | **Audit Module is not implemented in the PoC.** No `audit_record` table, no audit-write task. | FR-13/14/BR-09 (manual overrides, audit history) belong to Admin & Reporting (candidate C5), which the approved PoC Selection explicitly did **not** select; none of poc-planner.md's 11 required validation-coverage items or the PoC Selection §4 success criteria reference an audit trail — see §9 |
 | 14 | **`Policy.post_checkin_cancellation` is omitted from the PoC schema entirely** (Revision 3). | HLD §4/N-05 leaves this policy value undecided; no selected PoC functionality or validation criterion exercises the `CheckedIn → Cancelled` transition — see §9 |
+| 15 | **Notification provider failure, for demo purposes, is controlled by a boot-time env var (`NOTIFICATION_DEMO_FORCE_FAIL`) only — no runtime HTTP toggle** (Revision 5). | A live demo-control endpoint was considered and explicitly rejected on human review as an unnecessary new mutable control surface for a two-day PoC; a process-restart-based flag carries no more exposure than existing local-only config (`DATABASE_URL`, `PORT`) — see [TASK-18](tasks/TASK-18-notification-demo-ui.md) |
 
 ## 2. Proposed Repository / Module Structure
 
@@ -98,6 +101,7 @@ flowchart TD
     T15["TASK-15 Minimal PoC Demo UI (Capability 1 presentation layer)"]
     T16["TASK-16 TASK-15 verification evidence"]
     T17["TASK-17 Capability 2 Demo UI: Check-in & Automatic Release (presentation layer)"]
+    T18["TASK-18 Notification Demo UI: Notification Dispatch (presentation layer)"]
 
     T01 --> T02 --> T03
     T03 --> T04 --> T05
@@ -117,9 +121,11 @@ flowchart TD
     T05 --> T15 --> T16
     T15 --> T17
     T10 --> T17
+    T17 --> T18
+    T12 --> T18
 ```
 
-Note T07 has no arrow into T08 — adapters and the Gateway are parallel branches off the shared contract (TASK-06), per decision §1.12. T15/T16/T17 are a human-approved presentation-layer track (Revision 4), parallel to and non-blocking of T13/T14's scripted-harness track — see §9.
+Note T07 has no arrow into T08 — adapters and the Gateway are parallel branches off the shared contract (TASK-06), per decision §1.12. T15/T16/T17/T18 are a human-approved presentation-layer track (Revisions 4–5), parallel to and non-blocking of T13/T14's scripted-harness track — see §9.
 
 ## 4. Ordered Task Backlog
 
@@ -141,7 +147,8 @@ Note T07 has no arrow into T08 — adapters and the Gateway are parallel branche
 | TASK-14 | Final full-suite verification & evidence bundle | Run the entire automated suite + all demo scripts non-interactively; produce one consolidated evidence checklist mapped to §6/§7 | TASK-13 | Demo |
 | TASK-15 | Minimal PoC Demo UI (Capability 1 presentation layer) | Thin static/vanilla-JS browser layer over `GET /availability` + `POST /bookings`, so a non-technical audience can see Capability 1 without reading API responses. Human-approved presentation-layer addition, not a fourth functionality. **Completed.** | TASK-04, TASK-05 | Presentation (parallel) |
 | TASK-16 | TASK-15 verification evidence | Recorded manual browser checklist + automated smoke-test evidence for TASK-15. **Completed.** | TASK-15 | Presentation (parallel) |
-| TASK-17 | Capability 2 Demo UI: Check-in & Automatic Release (presentation layer) | Extends TASK-15 into a React+Vite+TypeScript SPA that makes the already-implemented, already-verified Capability 2 (check-in, automatic release, availability refresh) observable live in a browser. Bundles three minimal, human-approved backend additions (`GET /bookings/:id`, `external_mapping` seed fixtures, in-process worker/scheduler wiring) needed only to let the UI observe real backend state. Human-approved presentation-layer addition, not a fourth functionality. **Proposed, Revision 4 — see [TASK-17](tasks/TASK-17-capability2-demo-ui.md).** | TASK-15, TASK-08, TASK-09, TASK-10 | Presentation (parallel) |
+| TASK-17 | Capability 2 Demo UI: Check-in & Automatic Release (presentation layer) | Extends TASK-15 into a React+Vite+TypeScript SPA that makes the already-implemented, already-verified Capability 2 (check-in, automatic release, availability refresh) observable live in a browser. Bundles three minimal, human-approved backend additions (`GET /bookings/:id`, `external_mapping` seed fixtures, in-process worker/scheduler wiring) needed only to let the UI observe real backend state. Human-approved presentation-layer addition, not a fourth functionality. **Completed (status corrected, Revision 5 — independently re-verified: 103/14 tests passing, manual evidence recorded in [TASK-17-verification-evidence.md](tasks/TASK-17-verification-evidence.md)). See [TASK-17](tasks/TASK-17-capability2-demo-ui.md).** | TASK-15, TASK-08, TASK-09, TASK-10 | Presentation (parallel) |
+| TASK-18 | Notification Demo UI: Notification Dispatch (presentation layer) | Extends TASK-17's React application so the already-implemented, already-verified Capability 3 (transactional outbox, claim/lease worker, mocked channel) is observable live in a browser. Bundles two minimal, human-approved backend additions (`GET /bookings/:id/notifications`, `NOTIFICATION_DEMO_FORCE_FAIL` boot-time env var — no runtime HTTP toggle) needed only to let the UI observe real backend state and demonstrate provider-failure isolation live. Human-approved presentation-layer addition, not a fourth functionality. **Proposed, Revision 5 — see [TASK-18](tasks/TASK-18-notification-demo-ui.md).** | TASK-17, TASK-11, TASK-12 | Presentation (parallel) |
 
 ## 5. Parallelisation Opportunities
 
@@ -152,7 +159,7 @@ After **TASK-01→02→03** (Foundation, strictly sequential, forms the floor fo
 - **Stream 3 — Track B matching/release side (TASK-08, TASK-09), starting once TASK-04 lands.** TASK-08 needs TASK-06 (contract) + TASK-04 (a `Reserved` booking to match against) — **not** TASK-07; it can proceed in parallel with TASK-07. TASK-09 needs only TASK-04. TASK-08 and TASK-09 can run in parallel with each other.
 - **Stream 4 — Track C mechanism (TASK-11), starting once TASK-04 and TASK-09 land** (it needs both event sources for producer wiring). The claim/lease worker and fake channel *internals* have no dependency beyond TASK-03's schema and could be scaffolded earlier by a third implementer working ahead, but the task as scoped (including producer wiring) completes only after TASK-04/TASK-09.
 - **TASK-10** joins TASK-08+TASK-09. **TASK-12** follows TASK-11. **TASK-13** joins TASK-05+TASK-10+TASK-12. **TASK-14** is the final sequential step.
-- **Stream 5 — Presentation layer (TASK-15/16, completed; TASK-17, proposed).** TASK-15 depends only on TASK-05 and ran in parallel with Track B/C, touching none of that code — already landed. TASK-17 depends on TASK-15 (the UI it extends) and on TASK-08/09/10 (the Capability 2 backend it makes observable) — it can start as soon as those are done, independent of Track C (TASK-11/12) and of TASK-13/14, which it neither blocks nor is blocked by.
+- **Stream 5 — Presentation layer (TASK-15/16/17, completed; TASK-18, proposed).** TASK-15 depends only on TASK-05 and ran in parallel with Track B/C, touching none of that code — already landed. TASK-17 depends on TASK-15 (the UI it extends) and on TASK-08/09/10 (the Capability 2 backend it makes observable) — independently re-verified complete in Revision 5. TASK-18 depends on TASK-17 (the UI it extends) and on TASK-11/12 (the Capability 3 backend it makes observable) — it can start as soon as those are done, independent of TASK-13/14, which it neither blocks nor is blocked by.
 
 **Suggested grouping for 2–3 implementers over ~2 days:**
 - Implementer 1: Foundation (pairs on TASK-01–03) → TASK-04 → TASK-05 → contributes to TASK-13.
@@ -174,9 +181,9 @@ After **TASK-01→02→03** (Foundation, strictly sequential, forms the floor fo
 | 6 | Late check-in after release doesn't restore booking | TASK-08, TASK-10, TASK-13 |
 | 7 | Released resources become available again | TASK-04, TASK-09, TASK-10, TASK-13 |
 | 8 | Two adapters, same contract, no Booking-domain changes | TASK-06, TASK-07, TASK-13 |
-| 9 | Exactly one notification intent per lifecycle event | TASK-11, TASK-12 |
-| 10 | Notification failure doesn't affect booking/release correctness | TASK-11, TASK-12, TASK-13 |
-| 11 | Documented at-least-once notification behaviour preserved | TASK-11, TASK-12, TASK-14 |
+| 9 | Exactly one notification intent per lifecycle event | TASK-11, TASK-12, TASK-18 (browser demo, real status observed) |
+| 10 | Notification failure doesn't affect booking/release correctness | TASK-11, TASK-12, TASK-13, TASK-18 (browser demo of failure isolation via `NOTIFICATION_DEMO_FORCE_FAIL`) |
+| 11 | Documented at-least-once notification behaviour preserved | TASK-11, TASK-12, TASK-14, TASK-18 (browser-observed recovery/terminal-failure, not a new guarantee) |
 
 **PoC Selection §4 functionality → FR/BR traceability:**
 
@@ -184,7 +191,7 @@ After **TASK-01→02→03** (Foundation, strictly sequential, forms the floor fo
 |---|---|---|
 | 1 — Booking Creation | FR-03, FR-01 (scaffolding), FR-05/R-01, BR-02, BR-01/03/04 | TASK-04, TASK-05 |
 | 2 — Automatic Release | FR-09, FR-08 (scaffolding), R-02/03/04/05, BR-05/06/07/08, FR-10, FR-19/R-09 | TASK-06–TASK-10, TASK-13 |
-| 3 — Notification Dispatch | FR-18 | TASK-11, TASK-12 |
+| 3 — Notification Dispatch | FR-18 | TASK-11, TASK-12, TASK-18 (presentation layer) |
 
 ## 7. Verification and Evidence Matrix
 
@@ -194,7 +201,7 @@ After **TASK-01→02→03** (Foundation, strictly sequential, forms the floor fo
 | Check-in/release idempotency | Duplicate-delivery test, sweep-run-twice test, late-checkin-unmatched test, availability-refresh test | TASK-10 (tests), TASK-13 (demo) |
 | Notification dedup | Failure-isolation test, crash-simulation dedup test, exactly-one-intent test | TASK-12 (tests), TASK-13 (demo) |
 | End-to-end demo story | Full narrative e2e test + consolidated full-suite run | TASK-13 (test), TASK-14 (final run + evidence checklist) |
-| Live browser presentation (Capability 1 + 2) | Manual checklist + screenshots/recording of both demo scenarios, browser-network confirmation that displayed states are backend-sourced | TASK-15/16 (Capability 1, completed), TASK-17 (Capability 2, proposed) |
+| Live browser presentation (Capability 1 + 2 + 3) | Manual checklist + screenshots/recording of all three demo scenarios, browser-network confirmation that displayed states (including notification status) are backend-sourced | TASK-15/16 (Capability 1, completed), TASK-17 (Capability 2, completed), TASK-18 (Capability 3, proposed) |
 
 ## 8. End-to-end Demo Execution Plan
 
@@ -206,7 +213,7 @@ After **TASK-01→02→03** (Foundation, strictly sequential, forms the floor fo
 
 **Step 4 — Final verification (TASK-14):** run the full automated suite plus all demo scenarios end-to-end, non-interactively, collect the evidence bundle against §6/§7.
 
-**Presentation-layer complement (TASK-15/16, completed; TASK-17, proposed):** independent of Steps 1–4's scripted harness, a live browser UI lets a non-technical audience click through the same Discover→Reserve→Confirm→Reclaim→Re-offer story from §5 of the PoC Selection. TASK-15/16 cover Capability 1 today; TASK-17 proposes extending it to Capability 2 (real check-in submission through the `app-qr` adapter, and a real automatic release observed live via the existing Release Engine, reusing the demo-override policy fixture already in seed data). This track does not replace or alter TASK-13/14's scripted evidence — it is an additional, parallel surface.
+**Presentation-layer complement (TASK-15/16/17, completed; TASK-18, proposed):** independent of Steps 1–4's scripted harness, a live browser UI lets a non-technical audience click through the same Discover→Reserve→Confirm→Notify→Reclaim→Re-offer→Notify story from §5 of the PoC Selection. TASK-15/16 cover Capability 1; TASK-17 extends it to Capability 2 (real check-in submission through the `app-qr` adapter, and a real automatic release observed live via the existing Release Engine, reusing the demo-override policy fixture already in seed data) — both now completed and independently re-verified. TASK-18 proposes extending it further to Capability 3 (real notification-status observation via a new booking-scoped read endpoint, and a live demonstration that mocked-provider failure never blocks booking/release success, using a boot-time-only failure toggle). This track does not replace or alter TASK-13/14's scripted evidence — it is an additional, parallel surface.
 
 ## 9. Risks, Blockers, and Human Decisions Required
 
@@ -221,9 +228,12 @@ After **TASK-01→02→03** (Foundation, strictly sequential, forms the floor fo
 | 7 | Two offices/timezones for seed data | Implementation-level seed choice, folds in PoC-Q-03 | No |
 | 8 | No CI/CD, no SAST, no cloud deployment for the PoC | Explicitly out of scope per C-01 and the fixed stack decisions | No |
 | 9 | No admin console, no view/cancel UI, no audit reporting UI | Out of scope per PoC Selection §2 (C4/C5 verdicts) | No |
-| 10 | Demo modality (item 1) resolved in practice: a live browser UI was built (TASK-15/16) and is being extended (TASK-17), in addition to — not instead of — TASK-13's planned scripted CLI/API harness | Resolved, human-approved (Revision 4) | No |
+| 10 | Demo modality (item 1) resolved in practice: a live browser UI was built (TASK-15/16/17, all completed), in addition to — not instead of — TASK-13's planned scripted CLI/API harness | Resolved, human-approved (Revision 4) | No |
 | 11 | TASK-17 introduces React+Vite+TypeScript frontend build tooling, not present anywhere in the repo before this decision | Human decision — approved 2026-09-25 | No |
 | 12 | TASK-17 bundles three minimal new backend surfaces needed only to make Capability 2 observable in a browser: a `GET /bookings/:id` read endpoint (deliberately narrower than the not-selected FR-04), `external_mapping` seed fixture data, and in-process worker/scheduler wiring at boot (a documented simplification of plan §1 decision 11's separate `api`/`worker` process split) | Human decision — approved 2026-09-25, detailed in [TASK-17](tasks/TASK-17-capability2-demo-ui.md) | No |
+| 13 | This document's TASK-17 status was stale ("Proposed") after TASK-17 was actually implemented and completed — corrected in Revision 5 based on independent re-verification, not a scope change | Documentation correction | No |
+| 14 | TASK-18 bundles two minimal new backend surfaces needed only to make Capability 3 observable in a browser: a `GET /bookings/:id/notifications` read endpoint (booking-scoped, read-only, no provider internals) and a `NOTIFICATION_DEMO_FORCE_FAIL` boot-time env var (deliberately **not** a runtime HTTP toggle — that alternative was considered and rejected) | Human decision — approved 2026-09-25, detailed in [TASK-18](tasks/TASK-18-notification-demo-ui.md) | No |
+| 15 | TASK-18's Scenario C (notification provider failure) requires a local process restart to flip provider availability, since no runtime toggle exists — accepted as a deliberate, safer trade-off for a two-day Camp demo | Human decision — approved 2026-09-25 | No |
 
 No item blocks starting Foundation (TASK-01–03). Item 1 (demo modality) is resolved by item 10.
 
@@ -231,10 +241,14 @@ No item blocks starting Foundation (TASK-01–03). Item 1 (demo modality) is res
 
 Every selected PoC functionality is covered (Booking Creation: TASK-04/05; Automatic Release via two adapters: TASK-06–10; Notification Dispatch: TASK-11/12). Every item in poc-planner.md's 11-point Required Validation Coverage and every FR/BR traced in PoC Selection §4 maps to at least one task (§6). All 14 core delivery tasks are independently understandable, dependency-ordered (§3/§4), and bounded to one coherent unit of delivery work sized for a single implementation/review session — no task is a vague catch-all, and none is sub-atomic (one migration, one test case). Acceptance criteria in each task file are observable/testable. No approved HLD or PoC Selection scope has been changed; the Audit-omission, Gateway-decoupling, and Revision 3 corrections are implementation-level clarifications, not scope changes, and are explicitly logged in §9 rather than silently applied. The demo-modality item is resolved (§9 item 10).
 
-**Verdict on the core three functionalities: APPROVED — READY FOR IMPLEMENTATION** (unchanged from Revision 3; TASK-01–14 carry no scope change in Revision 4).
+**Verdict on the core three functionalities: APPROVED — READY FOR IMPLEMENTATION** (unchanged from Revision 3; TASK-01–14 carry no scope change in Revision 4 or Revision 5).
 
-**Revision 4 addendum (presentation layer, TASK-15–17):** TASK-15/16 are completed and were independently re-verified during this revision (`npm test`: 85/85 passing against the real Docker Postgres, `npm run lint` clean, as of 2026-09-25). TASK-17 is newly proposed in this revision: a human-approved presentation-layer extension, not a fourth functionality, whose backend dependencies (§9 items 11–12) have already been through human review rather than being silently introduced. TASK-17 itself has not yet been implemented.
+**Revision 4 addendum (presentation layer, TASK-15–17):** TASK-15/16 are completed and were independently re-verified during this revision (`npm test`: 85/85 passing against the real Docker Postgres, `npm run lint` clean, as of 2026-09-25). TASK-17 was newly proposed in this revision.
 
-**Verdict on TASK-17: PROPOSED — READY FOR HUMAN REVIEW** (all blocking decisions for this task were resolved during this planning session; implementation has not begun).
+**Revision 5 addendum (presentation layer, TASK-17–18):** TASK-17 is now **completed** — independent re-verification during this revision found the full backend (TASK-06–10) and Capability 3 backend (TASK-11/12) both already implemented and passing (`npm test`: 103/103, `npm run test:frontend`: 14/14, against the real Docker Postgres, 2026-09-25), and TASK-17's own frontend code, tests, and manual verification evidence already recorded and complete; only this document's status marker for TASK-17 had not caught up (§9 item 13). TASK-18 is newly proposed in this revision: a human-approved presentation-layer extension, not a fourth or fifth functionality, whose backend dependencies (§9 items 14–15) have already been through human review rather than being silently introduced. TASK-18 itself has not yet been implemented.
+
+**Verdict on TASK-17: COMPLETED** (status corrected this revision; implementation, tests, and manual verification evidence all exist and were independently re-verified 2026-09-25).
+
+**Verdict on TASK-18: PROPOSED — READY FOR HUMAN REVIEW** (all blocking decisions for this task were resolved during this planning session; implementation has not begun).
 
 Per `.claude/agents/poc-planner.md`, this agent's lifecycle ends here. No implementation begins automatically; no further lifecycle stage is invoked.
