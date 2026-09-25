@@ -1,0 +1,1656 @@
+{
+  "schemaVersion": 3,
+  "kind": "history",
+  "harvestedAt": "2026-09-25T10:09:21.252Z",
+  "member": "MilosBjelcevic167",
+  "repo": {
+    "name": "siliconskunk"
+  },
+  "sources": {
+    "claudeCode": {
+      "status": "harvested",
+      "filesScanned": 23,
+      "sessionsMatched": 19,
+      "failures": []
+    },
+    "copilot": {
+      "status": "empty",
+      "reason": "Copilot session files exist for this repo but contain no requests",
+      "hashesSeen": 81,
+      "hashesMatched": 1,
+      "filesScanned": 1,
+      "failures": []
+    },
+    "codex": {
+      "status": "empty",
+      "reason": "Codex sessions exist on this machine but none belong to this repo",
+      "filesScanned": 5,
+      "failures": []
+    },
+    "cursor": {
+      "status": "empty",
+      "reason": "no Cursor workspace on this machine points at this repo",
+      "workspacesScanned": 18
+    }
+  },
+  "chat": {
+    "claudeCode": [
+      {
+        "sessionId": "0301dbd3-3ed0-4efd-8199-845bf6e51433",
+        "startedAt": "2026-09-25T09:06:55.837Z",
+        "endedAt": "2026-09-25T10:08:19.259Z",
+        "durationMinutes": 61,
+        "branches": [
+          "main"
+        ],
+        "userPrompts": 3,
+        "promptLength": {
+          "count": 3,
+          "min": 7,
+          "median": 8,
+          "p90": 18,
+          "max": 18,
+          "mean": 11,
+          "totalChars": 33
+        },
+        "corrections": 0,
+        "assistantTurns": 457,
+        "subagentRecords": 0,
+        "toolCalls": {
+          "Bash": 93,
+          "Read": 49,
+          "mcp__ccd_session__mark_chapter": 1,
+          "Edit": 53,
+          "Write": 30,
+          "ToolSearch": 2,
+          "mcp__Claude_Preview__preview_start": 2,
+          "mcp__Claude_Preview__preview_logs": 2,
+          "mcp__Claude_Preview__preview_snapshot": 9,
+          "mcp__Claude_Preview__preview_click": 9,
+          "mcp__Claude_Preview__preview_eval": 2,
+          "mcp__Claude_Preview__preview_screenshot": 4,
+          "mcp__Claude_Preview__preview_network": 3,
+          "mcp__Claude_Preview__preview_console_logs": 2,
+          "mcp__Claude_Preview__preview_stop": 2,
+          "Agent": 2
+        },
+        "toolCallTotal": 265,
+        "commands": {
+          "test": 24,
+          "buildOrLint": 11,
+          "destructive": 0,
+          "other": 60
+        },
+        "testRuns": [
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T09:08:20.285Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T09:15:22.082Z"
+          },
+          {
+            "outcome": "fail",
+            "at": "2026-09-25T09:17:12.785Z"
+          },
+          {
+            "outcome": "fail",
+            "at": "2026-09-25T09:17:28.243Z"
+          },
+          {
+            "outcome": "fail",
+            "at": "2026-09-25T09:18:00.380Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T09:19:14.411Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T09:19:26.007Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T09:19:43.050Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T09:20:08.430Z"
+          },
+          {
+            "outcome": "fail",
+            "at": "2026-09-25T09:28:37.337Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T09:29:43.948Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T09:30:49.879Z"
+          },
+          {
+            "outcome": "fail",
+            "at": "2026-09-25T09:31:37.778Z"
+          },
+          {
+            "outcome": "fail",
+            "at": "2026-09-25T09:32:19.428Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T09:32:29.672Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T09:32:37.127Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T09:33:16.463Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T09:35:28.573Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T09:39:16.480Z"
+          },
+          {
+            "outcome": "fail",
+            "at": "2026-09-25T09:53:22.728Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T09:54:37.899Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T09:55:41.359Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T09:59:18.646Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T09:59:42.021Z"
+          }
+        ],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "injectedRecordsSkipped": 1,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-25T09:06:55.875Z",
+                "text": "TASK-17"
+              },
+              {
+                "at": "2026-09-25T09:11:52.170Z",
+                "text": "approved, continue"
+              },
+              {
+                "at": "2026-09-25T10:07:52.857Z",
+                "text": "approved"
+              }
+            ],
+            "offered": 3,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [],
+            "offered": 0,
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sessionId": "0d15a534-ed80-41dd-96f1-ba563b0cde84",
+        "startedAt": "2026-09-24T13:06:54.395Z",
+        "endedAt": "2026-09-24T13:25:28.298Z",
+        "durationMinutes": 19,
+        "branches": [
+          "main"
+        ],
+        "userPrompts": 3,
+        "promptLength": {
+          "count": 3,
+          "min": 7,
+          "median": 18,
+          "p90": 23,
+          "max": 23,
+          "mean": 16,
+          "totalChars": 48
+        },
+        "corrections": 0,
+        "assistantTurns": 109,
+        "subagentRecords": 0,
+        "toolCalls": {
+          "Bash": 33,
+          "Read": 19,
+          "mcp__ccd_session__mark_chapter": 1,
+          "Write": 2,
+          "Edit": 2,
+          "Agent": 1
+        },
+        "toolCallTotal": 58,
+        "commands": {
+          "test": 3,
+          "buildOrLint": 2,
+          "destructive": 0,
+          "other": 28
+        },
+        "testRuns": [
+          {
+            "outcome": "fail",
+            "at": "2026-09-24T13:19:15.944Z"
+          },
+          {
+            "outcome": "fail",
+            "at": "2026-09-24T13:19:36.147Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-24T13:19:55.358Z"
+          }
+        ],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "injectedRecordsSkipped": 1,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-24T13:06:54.422Z",
+                "text": "does /work agent works?"
+              },
+              {
+                "at": "2026-09-24T13:10:57.766Z",
+                "text": "TASK-02"
+              },
+              {
+                "at": "2026-09-24T13:16:44.594Z",
+                "text": "approved, continue"
+              }
+            ],
+            "offered": 3,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [],
+            "offered": 0,
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sessionId": "2d107709-d769-4e1a-b144-d9138a012451",
+        "startedAt": "2026-09-25T07:14:33.568Z",
+        "endedAt": "2026-09-25T07:23:26.470Z",
+        "durationMinutes": 9,
+        "branches": [
+          "main"
+        ],
+        "userPrompts": 3,
+        "promptLength": {
+          "count": 3,
+          "min": 7,
+          "median": 8,
+          "p90": 32,
+          "max": 32,
+          "mean": 16,
+          "totalChars": 47
+        },
+        "corrections": 0,
+        "assistantTurns": 83,
+        "subagentRecords": 0,
+        "toolCalls": {
+          "Bash": 16,
+          "Read": 22,
+          "mcp__ccd_session__mark_chapter": 1,
+          "Write": 4,
+          "Edit": 3,
+          "Agent": 1
+        },
+        "toolCallTotal": 47,
+        "commands": {
+          "test": 3,
+          "buildOrLint": 1,
+          "destructive": 0,
+          "other": 12
+        },
+        "testRuns": [
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T07:18:40.182Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T07:18:42.272Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T07:18:57.243Z"
+          }
+        ],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "injectedRecordsSkipped": 1,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-25T07:14:33.630Z",
+                "text": "TASK-07"
+              },
+              {
+                "at": "2026-09-25T07:17:50.645Z",
+                "text": "approved, go ahead and implement"
+              },
+              {
+                "at": "2026-09-25T07:23:19.544Z",
+                "text": "approved"
+              }
+            ],
+            "offered": 3,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [],
+            "offered": 0,
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sessionId": "2eeee6a8-a218-4096-b621-d859084c9854",
+        "startedAt": "2026-09-24T10:29:55.774Z",
+        "endedAt": "2026-09-24T11:21:46.694Z",
+        "durationMinutes": 52,
+        "branches": [
+          "main"
+        ],
+        "userPrompts": 3,
+        "promptLength": {
+          "count": 3,
+          "min": 9,
+          "median": 9,
+          "p90": 29,
+          "max": 29,
+          "mean": 16,
+          "totalChars": 47
+        },
+        "corrections": 0,
+        "assistantTurns": 69,
+        "subagentRecords": 0,
+        "toolCalls": {
+          "Bash": 4,
+          "Read": 7,
+          "AskUserQuestion": 1,
+          "Agent": 2,
+          "ToolSearch": 2,
+          "Write": 17,
+          "ExitPlanMode": 3,
+          "Edit": 9
+        },
+        "toolCallTotal": 45,
+        "commands": {
+          "test": 0,
+          "buildOrLint": 0,
+          "destructive": 0,
+          "other": 4
+        },
+        "testRuns": [],
+        "planningSignals": 3,
+        "malformedLines": 0,
+        "injectedRecordsSkipped": 0,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-24T10:29:55.815Z",
+                "text": "poc tasks"
+              },
+              {
+                "at": "2026-09-24T10:30:03.813Z",
+                "text": "[Request interrupted by user]"
+              },
+              {
+                "at": "2026-09-24T10:30:13.800Z",
+                "text": "poc tasks"
+              }
+            ],
+            "offered": 3,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [],
+            "offered": 0,
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sessionId": "32f0af20-5352-4766-961f-459b9212898d",
+        "startedAt": "2026-09-25T07:29:33.961Z",
+        "endedAt": "2026-09-25T07:40:02.625Z",
+        "durationMinutes": 10,
+        "branches": [
+          "main"
+        ],
+        "userPrompts": 1,
+        "promptLength": {
+          "count": 1,
+          "min": 33067,
+          "median": 33067,
+          "p90": 33067,
+          "max": 33067,
+          "mean": 33067,
+          "totalChars": 33067
+        },
+        "corrections": 1,
+        "assistantTurns": 56,
+        "subagentRecords": 0,
+        "toolCalls": {
+          "Bash": 18,
+          "Read": 12,
+          "Agent": 5
+        },
+        "toolCallTotal": 35,
+        "commands": {
+          "test": 1,
+          "buildOrLint": 2,
+          "destructive": 0,
+          "other": 15
+        },
+        "testRuns": [
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T07:33:48.742Z"
+          }
+        ],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "injectedRecordsSkipped": 0,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-25T07:29:33.986Z",
+                "text": "You are acting as an independent Principal Software Architect, Senior Engineering Assessor, AI SDLC Specialist and Technical Bid Reviewer. Your task is to conduct a rigorous, evidence-based audit of the CURRENT repository for the ZRS Camp 2026 Smart Office Challenge. This is an …"
+              }
+            ],
+            "offered": 1,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [
+              {
+                "at": "2026-09-25T07:29:33.986Z",
+                "text": "You are acting as an independent Principal Software Architect, Senior Engineering Assessor, AI SDLC Specialist and Technical Bid Reviewer. Your task is to conduct a rigorous, evidence-based audit of the CURRENT repository for the ZRS Camp 2026 Smart Office Challenge. This is an …"
+              }
+            ],
+            "offered": 1,
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sessionId": "429d52ea-1f96-4f40-b63f-17a11c727f63",
+        "startedAt": "2026-09-24T09:58:24.437Z",
+        "endedAt": "2026-09-24T10:12:56.783Z",
+        "durationMinutes": 15,
+        "branches": [
+          "main"
+        ],
+        "userPrompts": 3,
+        "promptLength": {
+          "count": 3,
+          "min": 41,
+          "median": 1112,
+          "p90": 2471,
+          "max": 2471,
+          "mean": 1208,
+          "totalChars": 3624
+        },
+        "corrections": 1,
+        "assistantTurns": 37,
+        "subagentRecords": 0,
+        "toolCalls": {
+          "Bash": 5,
+          "Read": 6,
+          "Write": 1,
+          "Edit": 9
+        },
+        "toolCallTotal": 21,
+        "commands": {
+          "test": 0,
+          "buildOrLint": 0,
+          "destructive": 0,
+          "other": 5
+        },
+        "testRuns": [],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "injectedRecordsSkipped": 0,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-24T09:58:24.481Z",
+                "text": "Read the approved Smart Office Context Discovery and the approved High-Level Solution Design from the repository before making any recommendation. Your goal is to select the 2–3 Smart Office functionalities that should be implemented in the Camp PoC. The PoC must not attempt to …"
+              },
+              {
+                "at": "2026-09-24T10:03:42.978Z",
+                "text": "Human review feedback: The selection direction is approved, but make these final scope corrections: 1. Make the 2–3 selected PoC functionalities unambiguous against the Camp brief. Avoid grouping so many specification features under one \"functionality\". Prefer naming the core se…"
+              },
+              {
+                "at": "2026-09-24T10:12:42.687Z",
+                "text": "also this is approved so fix draft status"
+              }
+            ],
+            "offered": 3,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [
+              {
+                "at": "2026-09-24T09:58:24.481Z",
+                "text": "Read the approved Smart Office Context Discovery and the approved High-Level Solution Design from the repository before making any recommendation. Your goal is to select the 2–3 Smart Office functionalities that should be implemented in the Camp PoC. The PoC must not attempt to …"
+              }
+            ],
+            "offered": 1,
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sessionId": "5405dec8-bbb2-4bab-be7e-02144cad95dc",
+        "startedAt": "2026-09-24T18:47:44.083Z",
+        "endedAt": "2026-09-24T18:50:40.837Z",
+        "durationMinutes": 3,
+        "branches": [
+          "main"
+        ],
+        "userPrompts": 1,
+        "promptLength": {
+          "count": 1,
+          "min": 3609,
+          "median": 3609,
+          "p90": 3609,
+          "max": 3609,
+          "mean": 3609,
+          "totalChars": 3609
+        },
+        "corrections": 1,
+        "assistantTurns": 58,
+        "subagentRecords": 0,
+        "toolCalls": {
+          "Bash": 10,
+          "Read": 30,
+          "Write": 1
+        },
+        "toolCallTotal": 41,
+        "commands": {
+          "test": 1,
+          "buildOrLint": 0,
+          "destructive": 0,
+          "other": 9
+        },
+        "testRuns": [
+          {
+            "outcome": "pass",
+            "at": "2026-09-24T18:48:38.676Z"
+          }
+        ],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "injectedRecordsSkipped": 0,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-24T18:47:44.133Z",
+                "text": "We have completed Capability 1 of the Smart Office PoC: Booking Creation Before creating any new task, inspect the repository and analyse what was actually implemented for this capability. Use the repository as the source of truth. Review at minimum: - the approved Context Disco…"
+              }
+            ],
+            "offered": 1,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [
+              {
+                "at": "2026-09-24T18:47:44.133Z",
+                "text": "We have completed Capability 1 of the Smart Office PoC: Booking Creation Before creating any new task, inspect the repository and analyse what was actually implemented for this capability. Use the repository as the source of truth. Review at minimum: - the approved Context Disco…"
+              }
+            ],
+            "offered": 1,
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sessionId": "7bb7c821-5ab1-4820-826a-d1b40d3433d4",
+        "startedAt": "2026-09-24T13:27:08.919Z",
+        "endedAt": "2026-09-24T13:57:46.742Z",
+        "durationMinutes": 31,
+        "branches": [
+          "main"
+        ],
+        "userPrompts": 2,
+        "promptLength": {
+          "count": 2,
+          "min": 7,
+          "median": 20,
+          "p90": 32,
+          "max": 32,
+          "mean": 20,
+          "totalChars": 39
+        },
+        "corrections": 0,
+        "assistantTurns": 156,
+        "subagentRecords": 0,
+        "toolCalls": {
+          "Skill": 1,
+          "Bash": 42,
+          "Read": 25,
+          "ToolSearch": 1,
+          "TaskCreate": 4,
+          "TaskUpdate": 7,
+          "Edit": 5,
+          "Write": 7,
+          "Agent": 2,
+          "AskUserQuestion": 1
+        },
+        "toolCallTotal": 95,
+        "commands": {
+          "test": 5,
+          "buildOrLint": 10,
+          "destructive": 0,
+          "other": 28
+        },
+        "testRuns": [
+          {
+            "outcome": "fail",
+            "at": "2026-09-24T13:34:32.463Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-24T13:35:33.280Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-24T13:36:44.369Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-24T13:37:05.651Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-24T13:51:49.619Z"
+          }
+        ],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "injectedRecordsSkipped": 1,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-24T13:27:08.965Z",
+                "text": "Task-03"
+              },
+              {
+                "at": "2026-09-24T13:32:42.744Z",
+                "text": "approved, go ahead and implement"
+              }
+            ],
+            "offered": 2,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [],
+            "offered": 0,
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sessionId": "924c93db-4b33-4f08-aaa6-a1a9caf339d4",
+        "startedAt": "2026-09-24T18:08:29.283Z",
+        "endedAt": "2026-09-24T18:35:21.304Z",
+        "durationMinutes": 27,
+        "branches": [
+          "main"
+        ],
+        "userPrompts": 3,
+        "promptLength": {
+          "count": 3,
+          "min": 7,
+          "median": 8,
+          "p90": 18,
+          "max": 18,
+          "mean": 11,
+          "totalChars": 33
+        },
+        "corrections": 0,
+        "assistantTurns": 202,
+        "subagentRecords": 0,
+        "toolCalls": {
+          "Bash": 42,
+          "Read": 43,
+          "Edit": 16,
+          "Write": 17,
+          "Agent": 2
+        },
+        "toolCallTotal": 120,
+        "commands": {
+          "test": 7,
+          "buildOrLint": 12,
+          "destructive": 1,
+          "other": 23
+        },
+        "testRuns": [
+          {
+            "outcome": "fail",
+            "at": "2026-09-24T18:19:09.091Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-24T18:19:55.753Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-24T18:20:44.598Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-24T18:20:53.908Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-24T18:30:01.175Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-24T18:30:27.056Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-24T18:30:36.239Z"
+          }
+        ],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "injectedRecordsSkipped": 1,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-24T18:08:29.333Z",
+                "text": "TASK-04"
+              },
+              {
+                "at": "2026-09-24T18:13:38.236Z",
+                "text": "approved, continue"
+              },
+              {
+                "at": "2026-09-24T18:35:13.113Z",
+                "text": "approved"
+              }
+            ],
+            "offered": 3,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [],
+            "offered": 0,
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sessionId": "9f9693bb-20b6-451e-a864-ccd4a165b40e",
+        "startedAt": "2026-09-25T07:23:57.006Z",
+        "endedAt": "2026-09-25T07:43:29.486Z",
+        "durationMinutes": 20,
+        "branches": [
+          "main"
+        ],
+        "userPrompts": 3,
+        "promptLength": {
+          "count": 3,
+          "min": 7,
+          "median": 8,
+          "p90": 8,
+          "max": 8,
+          "mean": 8,
+          "totalChars": 23
+        },
+        "corrections": 0,
+        "assistantTurns": 136,
+        "subagentRecords": 0,
+        "toolCalls": {
+          "Bash": 26,
+          "Read": 39,
+          "mcp__ccd_session__mark_chapter": 2,
+          "Edit": 5,
+          "Write": 7,
+          "Agent": 1
+        },
+        "toolCallTotal": 80,
+        "commands": {
+          "test": 2,
+          "buildOrLint": 4,
+          "destructive": 0,
+          "other": 20
+        },
+        "testRuns": [
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T07:35:52.967Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T07:36:29.693Z"
+          }
+        ],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "injectedRecordsSkipped": 1,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-25T07:23:57.036Z",
+                "text": "TASK-08"
+              },
+              {
+                "at": "2026-09-25T07:33:00.451Z",
+                "text": "approved"
+              },
+              {
+                "at": "2026-09-25T07:42:26.517Z",
+                "text": "approved"
+              }
+            ],
+            "offered": 3,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [],
+            "offered": 0,
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sessionId": "a841f212-c0f1-4e33-9704-7d38b32b19ed",
+        "startedAt": "2026-09-24T09:03:55.262Z",
+        "endedAt": "2026-09-24T09:53:46.024Z",
+        "durationMinutes": 50,
+        "branches": [
+          "main"
+        ],
+        "userPrompts": 3,
+        "promptLength": {
+          "count": 3,
+          "min": 728,
+          "median": 2196,
+          "p90": 2965,
+          "max": 2965,
+          "mean": 1963,
+          "totalChars": 5889
+        },
+        "corrections": 2,
+        "assistantTurns": 148,
+        "subagentRecords": 0,
+        "toolCalls": {
+          "Bash": 27,
+          "Read": 9,
+          "mcp__ccd_session__mark_chapter": 1,
+          "Write": 1,
+          "Edit": 39
+        },
+        "toolCallTotal": 77,
+        "commands": {
+          "test": 0,
+          "buildOrLint": 0,
+          "destructive": 0,
+          "other": 27
+        },
+        "testRuns": [],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "injectedRecordsSkipped": 0,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-24T09:03:55.309Z",
+                "text": "Work on Stage 2 of the Smart Office Agentic SDLC: High-Level Solution Design. First, inspect the repository and read all relevant project context, especially: - the original Smart Office specification - the approved Context Discovery document Your goal is to produce a High-Level…"
+              },
+              {
+                "at": "2026-09-24T09:34:20.395Z",
+                "text": "Human HLD review completed. The overall architecture direction is approved, but the HLD is not yet approved. Address the following review findings before the final human gate: 1. BR-02 must remain correct under concurrent requests. Explain how the system guarantees that an emplo…"
+              },
+              {
+                "at": "2026-09-24T09:52:58.730Z",
+                "text": "One final consistency correction before approval. In §5.4 the document says that rerunning the release sweep \"never double-releases or double-notifies\". This conflicts with §5.5, which correctly documents that external notification delivery is at-least-once and can rarely duplic…"
+              }
+            ],
+            "offered": 3,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [
+              {
+                "at": "2026-09-24T09:03:55.309Z",
+                "text": "Work on Stage 2 of the Smart Office Agentic SDLC: High-Level Solution Design. First, inspect the repository and read all relevant project context, especially: - the original Smart Office specification - the approved Context Discovery document Your goal is to produce a High-Level…"
+              },
+              {
+                "at": "2026-09-24T09:52:58.730Z",
+                "text": "One final consistency correction before approval. In §5.4 the document says that rerunning the release sweep \"never double-releases or double-notifies\". This conflicts with §5.5, which correctly documents that external notification delivery is at-least-once and can rarely duplic…"
+              }
+            ],
+            "offered": 2,
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sessionId": "ae480a02-967d-4432-ba07-6bc7ed1cb38a",
+        "startedAt": "2026-09-24T11:37:46.667Z",
+        "endedAt": "2026-09-24T11:54:59.916Z",
+        "durationMinutes": 17,
+        "branches": [
+          "main"
+        ],
+        "userPrompts": 2,
+        "promptLength": {
+          "count": 2,
+          "min": 6501,
+          "median": 11749,
+          "p90": 16997,
+          "max": 16997,
+          "mean": 11749,
+          "totalChars": 23498
+        },
+        "corrections": 2,
+        "assistantTurns": 225,
+        "subagentRecords": 0,
+        "toolCalls": {
+          "Bash": 25,
+          "Read": 37,
+          "ToolSearch": 1,
+          "TaskCreate": 17,
+          "TaskUpdate": 32,
+          "Edit": 28,
+          "Write": 4
+        },
+        "toolCallTotal": 144,
+        "commands": {
+          "test": 0,
+          "buildOrLint": 0,
+          "destructive": 0,
+          "other": 25
+        },
+        "testRuns": [],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "injectedRecordsSkipped": 0,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-24T11:37:46.708Z",
+                "text": "You are working in the Smart Office ZRS Camp 2026 repository. Your task is to adapt an existing Agentic SDLC execution workflow from a client project for this repository. Do NOT redesign the framework from scratch. The existing workflow already has a good reusable core. Your job…"
+              },
+              {
+                "at": "2026-09-24T11:51:24.558Z",
+                "text": "The Agentic workflow adaptation is not complete yet. The `agentic/` documentation now describes `/work TASK-XX`, but the `.claude/` integration was not updated. I need the workflow to be genuinely executable from Claude Code, not merely documented. Do NOT redesign the `agentic/`…"
+              }
+            ],
+            "offered": 2,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [
+              {
+                "at": "2026-09-24T11:37:46.708Z",
+                "text": "You are working in the Smart Office ZRS Camp 2026 repository. Your task is to adapt an existing Agentic SDLC execution workflow from a client project for this repository. Do NOT redesign the framework from scratch. The existing workflow already has a good reusable core. Your job…"
+              },
+              {
+                "at": "2026-09-24T11:51:24.558Z",
+                "text": "The Agentic workflow adaptation is not complete yet. The `agentic/` documentation now describes `/work TASK-XX`, but the `.claude/` integration was not updated. I need the workflow to be genuinely executable from Claude Code, not merely documented. Do NOT redesign the `agentic/`…"
+              }
+            ],
+            "offered": 2,
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sessionId": "be27f975-73aa-414c-9ebc-4fdd00b716af",
+        "startedAt": "2026-09-24T12:34:31.650Z",
+        "endedAt": "2026-09-24T13:05:47.284Z",
+        "durationMinutes": 31,
+        "branches": [
+          "main"
+        ],
+        "userPrompts": 9,
+        "promptLength": {
+          "count": 9,
+          "min": 7,
+          "median": 33,
+          "p90": 220,
+          "max": 220,
+          "mean": 78,
+          "totalChars": 699
+        },
+        "corrections": 0,
+        "assistantTurns": 196,
+        "subagentRecords": 0,
+        "toolCalls": {
+          "Bash": 43,
+          "Read": 19,
+          "mcp__ccd_session__mark_chapter": 4,
+          "ToolSearch": 2,
+          "TaskCreate": 7,
+          "TaskUpdate": 14,
+          "Write": 16,
+          "Edit": 5,
+          "ScheduleWakeup": 2,
+          "Monitor": 1,
+          "Agent": 1,
+          "AskUserQuestion": 1
+        },
+        "toolCallTotal": 115,
+        "commands": {
+          "test": 3,
+          "buildOrLint": 9,
+          "destructive": 0,
+          "other": 33
+        },
+        "testRuns": [
+          {
+            "outcome": "pass",
+            "at": "2026-09-24T12:45:47.335Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-24T12:46:55.876Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-24T12:52:35.041Z"
+          }
+        ],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "injectedRecordsSkipped": 1,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-24T12:34:31.691Z",
+                "text": "TASK-01"
+              },
+              {
+                "at": "2026-09-24T12:37:42.978Z",
+                "text": "approved, go ahead and implement"
+              },
+              {
+                "at": "2026-09-24T12:43:00.563Z",
+                "text": "Continue TASK-01 verification: check if the Docker daemon is up now (docker info), then run docker compose up -d and proceed with the remaining AC-1/AC-2/AC-3/AC-4 verification commands for TASK-01 implementation."
+              },
+              {
+                "at": "2026-09-24T12:52:09.428Z",
+                "text": "Continue TASK-01 verification: confirm the postgres container is healthy (docker compose ps), then run npm run migrate, npm test, npm run lint, npm run format:check and record output as verification evidence for TASK-01."
+              },
+              {
+                "at": "2026-09-24T12:56:35.975Z",
+                "text": "npm run start is missing, add it?"
+              },
+              {
+                "at": "2026-09-24T12:58:18.538Z",
+                "text": "approved, finish the workflow"
+              }
+            ],
+            "offered": 9,
+            "truncated": true
+          },
+          "corrections": {
+            "kept": [],
+            "offered": 0,
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sessionId": "c672b1d6-ed78-489b-ace4-8af721388d3d",
+        "startedAt": "2026-09-24T18:36:53.951Z",
+        "endedAt": "2026-09-24T18:47:16.461Z",
+        "durationMinutes": 10,
+        "branches": [
+          "main"
+        ],
+        "userPrompts": 3,
+        "promptLength": {
+          "count": 3,
+          "min": 7,
+          "median": 8,
+          "p90": 18,
+          "max": 18,
+          "mean": 11,
+          "totalChars": 33
+        },
+        "corrections": 0,
+        "assistantTurns": 80,
+        "subagentRecords": 0,
+        "toolCalls": {
+          "Bash": 27,
+          "Read": 16,
+          "mcp__ccd_session__mark_chapter": 1,
+          "Write": 1,
+          "Edit": 1,
+          "Agent": 1
+        },
+        "toolCallTotal": 47,
+        "commands": {
+          "test": 3,
+          "buildOrLint": 4,
+          "destructive": 0,
+          "other": 20
+        },
+        "testRuns": [
+          {
+            "outcome": "pass",
+            "at": "2026-09-24T18:38:04.438Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-24T18:42:40.990Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-24T18:42:50.681Z"
+          }
+        ],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "injectedRecordsSkipped": 1,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-24T18:36:53.990Z",
+                "text": "TASK-05"
+              },
+              {
+                "at": "2026-09-24T18:41:32.928Z",
+                "text": "approved, continue"
+              },
+              {
+                "at": "2026-09-24T18:47:08.718Z",
+                "text": "approved"
+              }
+            ],
+            "offered": 3,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [],
+            "offered": 0,
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sessionId": "dcfe7f80-27a7-418b-9e1c-20960a2a06f8",
+        "startedAt": "2026-09-25T08:42:57.435Z",
+        "endedAt": "2026-09-25T09:04:46.474Z",
+        "durationMinutes": 22,
+        "branches": [
+          "main"
+        ],
+        "userPrompts": 2,
+        "promptLength": {
+          "count": 2,
+          "min": 1032,
+          "median": 7909,
+          "p90": 14786,
+          "max": 14786,
+          "mean": 7909,
+          "totalChars": 15818
+        },
+        "corrections": 1,
+        "assistantTurns": 105,
+        "subagentRecords": 0,
+        "toolCalls": {
+          "Bash": 20,
+          "Read": 34,
+          "AskUserQuestion": 1,
+          "Write": 1,
+          "Edit": 16
+        },
+        "toolCallTotal": 72,
+        "commands": {
+          "test": 1,
+          "buildOrLint": 1,
+          "destructive": 0,
+          "other": 18
+        },
+        "testRuns": [
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T08:46:31.129Z"
+          }
+        ],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "injectedRecordsSkipped": 0,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-25T08:42:57.469Z",
+                "text": "We have now completed TASK-10 of the Smart Office Camp PoC. I want you to analyse the actual repository state and create TASK-17: Capability 2 Demo UI — Check-in & Automatic Release. IMPORTANT: This is a PLANNING task only. Do not implement code yet. Our objective is to extend t…"
+              },
+              {
+                "at": "2026-09-25T09:00:29.681Z",
+                "text": "TASK-17 looks ready in principle. Before implementation, correct two demo-scenario issues: 1. Successful check-in must use a deterministic demo fixture whose check-in deadline has NOT yet passed. The currently proposed Belgrade Desk demo override has a 00:05 deadline and risks i…"
+              }
+            ],
+            "offered": 2,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [
+              {
+                "at": "2026-09-25T08:42:57.469Z",
+                "text": "We have now completed TASK-10 of the Smart Office Camp PoC. I want you to analyse the actual repository state and create TASK-17: Capability 2 Demo UI — Check-in & Automatic Release. IMPORTANT: This is a PLANNING task only. Do not implement code yet. Our objective is to extend t…"
+              }
+            ],
+            "offered": 1,
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sessionId": "deef4d11-6568-4096-b597-c07749b0fa8f",
+        "startedAt": "2026-09-25T06:50:42.436Z",
+        "endedAt": "2026-09-25T07:06:25.204Z",
+        "durationMinutes": 16,
+        "branches": [
+          "main"
+        ],
+        "userPrompts": 3,
+        "promptLength": {
+          "count": 3,
+          "min": 7,
+          "median": 8,
+          "p90": 17,
+          "max": 17,
+          "mean": 11,
+          "totalChars": 32
+        },
+        "corrections": 0,
+        "assistantTurns": 147,
+        "subagentRecords": 0,
+        "toolCalls": {
+          "Bash": 39,
+          "Read": 26,
+          "mcp__ccd_session__mark_chapter": 1,
+          "Write": 11,
+          "Edit": 6,
+          "Agent": 1
+        },
+        "toolCallTotal": 84,
+        "commands": {
+          "test": 7,
+          "buildOrLint": 5,
+          "destructive": 0,
+          "other": 27
+        },
+        "testRuns": [
+          {
+            "outcome": "fail",
+            "at": "2026-09-25T06:57:30.174Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T06:57:43.158Z"
+          },
+          {
+            "outcome": "fail",
+            "at": "2026-09-25T06:58:00.172Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T06:58:17.978Z"
+          },
+          {
+            "outcome": "fail",
+            "at": "2026-09-25T06:58:45.267Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T06:59:32.969Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T06:59:44.419Z"
+          }
+        ],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "injectedRecordsSkipped": 1,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-25T06:50:42.470Z",
+                "text": "TASK-06"
+              },
+              {
+                "at": "2026-09-25T06:54:54.165Z",
+                "text": "approved,continue"
+              },
+              {
+                "at": "2026-09-25T07:06:13.838Z",
+                "text": "approved"
+              }
+            ],
+            "offered": 3,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [],
+            "offered": 0,
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sessionId": "e0a1fc4d-1809-4cda-bd17-9bab4a35db0f",
+        "startedAt": "2026-09-25T07:55:30.855Z",
+        "endedAt": "2026-09-25T08:10:39.986Z",
+        "durationMinutes": 15,
+        "branches": [
+          "main"
+        ],
+        "userPrompts": 3,
+        "promptLength": {
+          "count": 3,
+          "min": 7,
+          "median": 8,
+          "p90": 8,
+          "max": 8,
+          "mean": 8,
+          "totalChars": 23
+        },
+        "corrections": 0,
+        "assistantTurns": 128,
+        "subagentRecords": 0,
+        "toolCalls": {
+          "Bash": 31,
+          "Read": 31,
+          "mcp__ccd_session__mark_chapter": 2,
+          "Edit": 4,
+          "Write": 5,
+          "Agent": 1
+        },
+        "toolCallTotal": 74,
+        "commands": {
+          "test": 3,
+          "buildOrLint": 2,
+          "destructive": 0,
+          "other": 26
+        },
+        "testRuns": [
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T08:04:39.689Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T08:04:48.415Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T08:05:09.122Z"
+          }
+        ],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "injectedRecordsSkipped": 1,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-25T07:55:30.886Z",
+                "text": "TASK-09"
+              },
+              {
+                "at": "2026-09-25T08:02:00.938Z",
+                "text": "approved"
+              },
+              {
+                "at": "2026-09-25T08:10:32.478Z",
+                "text": "approved"
+              }
+            ],
+            "offered": 3,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [],
+            "offered": 0,
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sessionId": "ee8db0c9-9e3a-497c-acf5-b9f7b2d6d167",
+        "startedAt": "2026-09-24T18:51:16.206Z",
+        "endedAt": "2026-09-24T19:22:18.941Z",
+        "durationMinutes": 31,
+        "branches": [
+          "main"
+        ],
+        "userPrompts": 3,
+        "promptLength": {
+          "count": 3,
+          "min": 7,
+          "median": 32,
+          "p90": 1220,
+          "max": 1220,
+          "mean": 420,
+          "totalChars": 1259
+        },
+        "corrections": 0,
+        "assistantTurns": 181,
+        "subagentRecords": 0,
+        "toolCalls": {
+          "Bash": 34,
+          "Read": 24,
+          "Write": 5,
+          "Edit": 4,
+          "ToolSearch": 1,
+          "mcp__Claude_Preview__preview_start": 3,
+          "mcp__Claude_Preview__preview_screenshot": 8,
+          "mcp__Claude_Preview__preview_eval": 12,
+          "mcp__Claude_Preview__preview_fill": 3,
+          "mcp__Claude_Preview__preview_click": 4,
+          "mcp__Claude_Preview__preview_network": 2,
+          "mcp__Claude_Preview__preview_console_logs": 1,
+          "mcp__Claude_Preview__preview_stop": 1,
+          "Agent": 2
+        },
+        "toolCallTotal": 104,
+        "commands": {
+          "test": 5,
+          "buildOrLint": 3,
+          "destructive": 0,
+          "other": 27
+        },
+        "testRuns": [
+          {
+            "outcome": "pass",
+            "at": "2026-09-24T18:52:25.086Z"
+          },
+          {
+            "outcome": "fail",
+            "at": "2026-09-24T18:57:21.752Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-24T18:57:48.669Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-24T19:09:48.660Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-24T19:17:27.704Z"
+          }
+        ],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "injectedRecordsSkipped": 1,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-24T18:51:16.255Z",
+                "text": "TASK-15"
+              },
+              {
+                "at": "2026-09-24T18:56:03.314Z",
+                "text": "Approved, go ahead and implement"
+              },
+              {
+                "at": "2026-09-24T19:21:47.859Z",
+                "text": "➜ siliconskunk git:(main) ✗ npm run start:api > siliconskunk@0.1.0 start:api > ts-node --project tsconfig.base.json --transpile-only src/api/server.ts /Users/bjem/Projects/siliconskunk/src/shared/db/pool.ts:4 throw new Error(\"DATABASE_URL is not set. Copy .env.example to .env an…"
+              }
+            ],
+            "offered": 3,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [],
+            "offered": 0,
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sessionId": "fe3908f2-374b-4620-a3c7-1ba6e8c87be1",
+        "startedAt": "2026-09-25T08:11:28.494Z",
+        "endedAt": "2026-09-25T08:42:27.904Z",
+        "durationMinutes": 31,
+        "branches": [
+          "main"
+        ],
+        "userPrompts": 3,
+        "promptLength": {
+          "count": 3,
+          "min": 7,
+          "median": 8,
+          "p90": 44,
+          "max": 44,
+          "mean": 20,
+          "totalChars": 59
+        },
+        "corrections": 0,
+        "assistantTurns": 146,
+        "subagentRecords": 0,
+        "toolCalls": {
+          "Bash": 38,
+          "Read": 33,
+          "ToolSearch": 1,
+          "TaskCreate": 5,
+          "TaskUpdate": 10,
+          "Write": 1,
+          "Edit": 4,
+          "Agent": 2
+        },
+        "toolCallTotal": 94,
+        "commands": {
+          "test": 7,
+          "buildOrLint": 6,
+          "destructive": 0,
+          "other": 28
+        },
+        "testRuns": [
+          {
+            "outcome": "fail",
+            "at": "2026-09-25T08:20:19.781Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T08:20:40.560Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T08:20:55.242Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T08:21:19.951Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T08:22:25.903Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T08:36:19.628Z"
+          },
+          {
+            "outcome": "pass",
+            "at": "2026-09-25T08:36:52.585Z"
+          }
+        ],
+        "planningSignals": 0,
+        "malformedLines": 0,
+        "injectedRecordsSkipped": 1,
+        "excerpts": {
+          "prompts": {
+            "kept": [
+              {
+                "at": "2026-09-25T08:11:28.538Z",
+                "text": "TASK-10"
+              },
+              {
+                "at": "2026-09-25T08:18:08.137Z",
+                "text": "Approved, go with both defaults you proposed"
+              },
+              {
+                "at": "2026-09-25T08:42:13.979Z",
+                "text": "approved"
+              }
+            ],
+            "offered": 3,
+            "truncated": false
+          },
+          "corrections": {
+            "kept": [],
+            "offered": 0,
+            "truncated": false
+          }
+        }
+      }
+    ],
+    "copilot": [],
+    "codex": [],
+    "cursor": []
+  }
+}
