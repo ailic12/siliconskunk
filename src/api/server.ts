@@ -8,7 +8,9 @@ import { SystemClock, type Clock } from "../shared/clock";
 import { registerAuth } from "../shared/auth";
 import { registerBookingRoutes } from "../modules/booking/booking.routes";
 import { registerDemoUiRoutes } from "../demo-ui/demo-ui.routes";
-import { registerCheckinIngressRoutes } from "../modules/checkin-ingress";
+import { registerCheckinIngressRoutes, registerCheckinAdapter } from "../modules/checkin-ingress";
+import { appQrAdapter } from "../modules/checkin-ingress/adapters/app-qr.adapter";
+import { testHarnessAdapter } from "../modules/checkin-ingress/adapters/test-harness.adapter";
 
 export function buildApp(clock: Clock = new SystemClock()): FastifyInstance {
   const app = Fastify({ logger: false });
@@ -21,6 +23,8 @@ export function buildApp(clock: Clock = new SystemClock()): FastifyInstance {
   // booking routes are registered inside an encapsulated child context so
   // that hook applies only to them, not to the whole app.
   registerDemoUiRoutes(app);
+  registerCheckinAdapter(appQrAdapter);
+  registerCheckinAdapter(testHarnessAdapter);
   registerCheckinIngressRoutes(app);
   app.register(async (protectedApp) => {
     registerAuth(protectedApp);
